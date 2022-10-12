@@ -1,0 +1,18 @@
+[submodule "site-lisp/magit"]
+	path = site-lisp/magit
+	url = https://github.com/magit/magit.git
+[submodule "site-lisp/dash"]
+	path = site-lisp/dash
+	url = https://github.com/magnars/dash.el.git
+[submodule "site-lisp/transient"]
+	path = site-lisp/transient
+	url = https://github.com/magit/transient.git
+[submodule "site-lisp/with-editor"]
+	path = site-lisp/with-editor
+	url = https://github.com/magit/with-editor.git
+[submodule "site-lisp/compat"]
+	path = site-lisp/compat
+	url = https://git.sr.ht/~pkal/compat
+[submodule "site-lisp/lazy-load"]
+	path = site-lisp/lazy-load
+	url = https://github.com/manateelazycat/lazy-load.git
