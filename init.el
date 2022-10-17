@@ -94,15 +94,12 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
         ;; 继续递归搜索子目录
         (add-subdirs-to-load-path subdir-path)))))
 
-(add-subdirs-to-load-path creature/pkg-dir)
 (add-to-list 'load-path (expand-file-name "lisp" creature/config-dir) t)
-
-(require 'lazy-load)
-(lazy-load-global-keys
- '(("C-x g" . magit-status))
- "magit")
+(add-to-list 'load-path creature/pkg-dir t)
+(add-subdirs-to-load-path creature/pkg-dir)
 
 (require 'init-built-in)
+(require 'init-git)
 
 (require 'which-key)
 (setq which-key-show-early-on-C-h t)
