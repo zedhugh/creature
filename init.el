@@ -1,3 +1,5 @@
+;; -*- coding: utf-8; lexical-binding: t; -*-
+
 (defvar creature-gc-cons-threshold
   (if (display-graphic-p) (* 64 1024 1024) (* 16 1024 1024))
   "The default value to use for `gc-cons-threshold'.
@@ -93,11 +95,24 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
         (add-subdirs-to-load-path subdir-path)))))
 
 (add-subdirs-to-load-path creature/pkg-dir)
+(add-to-list 'load-path (expand-file-name "lisp" creature/config-dir) t)
 
 (require 'lazy-load)
 (lazy-load-global-keys
  '(("C-x g" . magit-status))
  "magit")
+
+(require 'init-built-in)
+
+(require 'which-key)
+(setq which-key-show-early-on-C-h t)
+(setq which-key-idle-delay 10000)
+(setq which-key-idle-secondary-delay 0.05)
+(which-key-mode 'toggle)
+
+(setq custom-file (expand-file-name "custom.el" creature/cache-dir))
+(when (file-exists-p custom-file)
+  (load custom-file 'noerror))
 
 (add-hook 'emacs-startup-hook
           (lambda ()
