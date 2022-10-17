@@ -28,4 +28,9 @@
   (setq magit-revision-show-gravatars
         '("^Author:     " . "^Commit:     ")))
 
+;;; ediff
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+
 (provide 'init-git)
