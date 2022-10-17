@@ -14,6 +14,7 @@
 
 (setq epg-pinentry-mode 'loopback)
 
+(require 'git-modes)
 (with-eval-after-load 'magit
   ;; (require 'forge)
 
