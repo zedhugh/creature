@@ -1,4 +1,5 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
+
 (require 'lazy-load)
 
 ;;; symbol-overlay-map
@@ -18,5 +19,11 @@
    ("M-n" . symbol-overlay-jump-next))
  "symbol-overlay")
 
+
+;;; mwim
+(lazy-load-global-keys
+ '(("C-a" . mwim-beginning-of-code-or-line)
+   ("C-e" . mwim-end-of-code-or-line))
+ "mwim")
 
 (provide 'init-edit)

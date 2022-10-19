@@ -1,37 +1,37 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(defvar creature-gc-cons-threshold
+(defvar creature/gc-cons-threshold
   (if (display-graphic-p) (* 64 1024 1024) (* 16 1024 1024))
   "The default value to use for `gc-cons-threshold'.
 If freezing sometimes, decrease it. If stuttering, increase it.")
 
-(defvar creature-gc-cons-upper-limit
+(defvar creature/gc-cons-upper-limit
   (if (display-graphic-p) (* 512 1024 1024) (* 128 1024 1024))
   "The temporary value for `gc-cons-threshold' to defer it.")
 
-(defvar creature-gc-timer (run-with-idle-timer 10 t #'garbage-collect)
+(defvar creature/gc-timer (run-with-idle-timer 10 t #'garbage-collect)
   "Run garbage collection when idle 10s.")
 
 (defvar default-file-name-handler-alist file-name-handler-alist
   "Temporary `file-name-handler-alist' for restore after startup.")
 
 ;; Speed up startup
-(defun creature-enlarge-gc-cons-threshold ()
+(defun creature/enlarge-gc-cons-threshold ()
   "Enlarge garbage collection threshold."
   (setq gc-cons-percentage  0.6
-        gc-cons-threshold   creature-gc-cons-upper-limit))
+        gc-cons-threshold   creature/gc-cons-upper-limit))
 
-(defun creature-normalize-gc-cons-threshold ()
+(defun creature/normalize-gc-cons-threshold ()
   "Normalize garbage collection threshold."
   (setq gc-cons-percentage  0.1
-        gc-cons-threshold   creature-gc-cons-threshold))
+        gc-cons-threshold   creature/gc-cons-threshold))
 
-(creature-enlarge-gc-cons-threshold)
+(creature/enlarge-gc-cons-threshold)
 (setq file-name-handler-alist nil)
 
 (add-hook 'emacs-startup-hook
           (lambda ()
-            (creature-normalize-gc-cons-threshold)
+            (creature/normalize-gc-cons-threshold)
             (setq file-name-handler-alist default-file-name-handler-alist)
 
             (setq read-process-output-max (* 1024 1024))
@@ -45,9 +45,9 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 
             ;; Avoid GC while minibuffer active.
             (add-hook 'minibuffer-setup-hook
-                      #'creature-enlarge-gc-cons-threshold)
+                      #'creature/enlarge-gc-cons-threshold)
             (add-hook 'minibuffer-exit-hook
-                      #'creature-normalize-gc-cons-threshold)))
+                      #'creature/normalize-gc-cons-threshold)))
 
 (defconst creature/config-dir
   (file-name-directory
@@ -101,6 +101,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (require 'init-built-in)
 (require 'init-git)
 (require 'init-edit)
+(require 'init-theme)
 
 (require 'which-key)
 (setq which-key-show-early-on-C-h t)

@@ -25,3 +25,6 @@
 [submodule "site-lisp/symbol-overlay"]
 	path = site-lisp/symbol-overlay
 	url = https://github.com/wolray/symbol-overlay.git
+[submodule "site-lisp/mwim"]
+	path = site-lisp/mwim
+	url = https://github.com/alezost/mwim.el.git
