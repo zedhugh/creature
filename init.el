@@ -124,3 +124,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (add-hook 'emacs-startup-hook
           (lambda ()
             (message (emacs-init-time))))
+
+(with-eval-after-load 'package
+  (add-to-list 'package-archives '("melpa"  . "https://melpa.org/packages/")))
+

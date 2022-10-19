@@ -1,6 +1,7 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'lazy-load)
+
 (lazy-load-global-keys
  '(("C-x g" . magit-status))
  "magit")

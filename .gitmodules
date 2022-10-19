@@ -52,3 +52,6 @@
 [submodule "site-lisp/corfu-doc"]
 	path = site-lisp/corfu-doc
 	url = https://github.com/galeo/corfu-doc.git
+[submodule "site-lisp/awesome-pair"]
+	path = site-lisp/awesome-pair
+	url = https://github.com/manateelazycat/awesome-pair.git
