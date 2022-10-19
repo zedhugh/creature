@@ -109,6 +109,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (require 'init-edit)
 (require 'init-theme)
 (require 'init-vertico)
+(require 'init-keybindings)
 
 (require 'which-key)
 (setq which-key-show-early-on-C-h t)

@@ -34,9 +34,9 @@
  "cape")
 
 
-(lazy-load-global-keys
+(lazy-load-local-keys
  '(("fr" . consult-recent-file))
- "consult" creature/prefix-key)
+ creature/map "consult")
 (with-eval-after-load 'consult
   (recentf-mode 1))
 

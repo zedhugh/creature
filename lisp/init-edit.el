@@ -20,13 +20,6 @@
  "symbol-overlay")
 
 
-;;; mwim
-(lazy-load-global-keys
- '(("C-a" . mwim-beginning-of-code-or-line)
-   ("C-e" . mwim-end-of-code-or-line))
- "mwim")
-
-
 (setq backward-delete-char-untabify-method 'hungry)
 
 

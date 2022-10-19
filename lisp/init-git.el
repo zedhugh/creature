@@ -5,6 +5,16 @@
  '(("C-x g" . magit-status))
  "magit")
 
+(lazy-load-local-keys
+ '(("gc"  . magit-clone)
+   ("gff" . magit-find-file)
+   ("gfc" . magit-find-git-config-file)
+   ("gfs" . magit-stage-file)
+   ("gi"  . magit-init)
+   ("gl"  . magit-list-repositories)
+   ("gs"  . magit-status))
+ creature/map "magit")
+
 ;; gpg config
 (defun kill-gpg-agent-when-emacs-exit ()
   "Kill `gpg-agent' for security when Emacs be killed."
