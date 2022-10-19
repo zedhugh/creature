@@ -100,6 +100,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 
 (require 'init-built-in)
 (require 'init-git)
+(require 'init-edit)
 
 (require 'which-key)
 (setq which-key-show-early-on-C-h t)
