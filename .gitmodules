@@ -28,3 +28,27 @@
 [submodule "site-lisp/mwim"]
 	path = site-lisp/mwim
 	url = https://github.com/alezost/mwim.el.git
+[submodule "site-lisp/marginalia"]
+	path = site-lisp/marginalia
+	url = https://github.com/minad/marginalia.git
+[submodule "site-lisp/vertico"]
+	path = site-lisp/vertico
+	url = https://github.com/minad/vertico.git
+[submodule "site-lisp/consult"]
+	path = site-lisp/consult
+	url = https://github.com/minad/consult.git
+[submodule "site-lisp/corfu"]
+	path = site-lisp/corfu
+	url = https://github.com/minad/corfu.git
+[submodule "site-lisp/cape"]
+	path = site-lisp/cape
+	url = https://github.com/minad/cape.git
+[submodule "site-lisp/orderless"]
+	path = site-lisp/orderless
+	url = https://github.com/oantolin/orderless.git
+[submodule "site-lisp/embark"]
+	path = site-lisp/embark
+	url = https://github.com/oantolin/embark.git
+[submodule "site-lisp/corfu-doc"]
+	path = site-lisp/corfu-doc
+	url = https://github.com/galeo/corfu-doc.git

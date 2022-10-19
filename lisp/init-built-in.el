@@ -52,6 +52,15 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+(with-eval-after-load 'recentf
+  (setq recentf-max-saved-items 1000)
+  ;; (add-to-list 'recentf-exclude "bookmarks")
+  (add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
+  (add-to-list 'recentf-exclude "node_modules")
+
+  (with-eval-after-load 'package
+    (add-to-list 'recentf-exclude (expand-file-name package-user-dir))))
+
 ;; Disable bell
 (setq visible-bell          nil
       ring-bell-function    'ignore)

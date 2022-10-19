@@ -26,4 +26,8 @@
    ("C-e" . mwim-end-of-code-or-line))
  "mwim")
 
+
+(setq backward-delete-char-untabify-method 'hungry)
+
+
 (provide 'init-edit)
