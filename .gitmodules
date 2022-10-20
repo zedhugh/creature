@@ -55,3 +55,6 @@
 [submodule "site-lisp/awesome-pair"]
 	path = site-lisp/awesome-pair
 	url = https://github.com/manateelazycat/awesome-pair.git
+[submodule "site-lisp/sdcv"]
+	path = site-lisp/sdcv
+	url = https://github.com/manateelazycat/sdcv.git

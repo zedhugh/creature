@@ -110,6 +110,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (require 'init-theme)
 (require 'init-vertico)
 (require 'init-keybindings)
+(require 'init-tools)
 
 (require 'which-key)
 (setq which-key-show-early-on-C-h t)
@@ -127,4 +128,3 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 
 (with-eval-after-load 'package
   (add-to-list 'package-archives '("melpa"  . "https://melpa.org/packages/")))
-
