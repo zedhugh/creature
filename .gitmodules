@@ -82,3 +82,6 @@
 [submodule "site-lisp/Emacs-wgrep"]
 	path = site-lisp/Emacs-wgrep
 	url = https://github.com/mhayashi1120/Emacs-wgrep.git
+[submodule "site-lisp/avy"]
+	path = site-lisp/avy
+	url = https://github.com/abo-abo/avy.git

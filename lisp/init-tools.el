@@ -75,4 +75,10 @@
  "rg")
 
 
+(lazy-load-local-keys
+ '(("jl" . avy-goto-line)
+   ("jw" . avy-goto-word-1))
+ creature/map "avy")
+
+
 (provide 'init-tools)
