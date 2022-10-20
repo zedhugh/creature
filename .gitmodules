@@ -64,3 +64,6 @@
 [submodule "site-lisp/yasnippet-snippets"]
 	path = site-lisp/yasnippet-snippets
 	url = https://github.com/AndreaCrotti/yasnippet-snippets.git
+[submodule "site-lisp/auto-yasnippet"]
+	path = site-lisp/auto-yasnippet
+	url = https://github.com/abo-abo/auto-yasnippet.git
