@@ -65,4 +65,9 @@
  rime-active-mode-map)
 
 
+(lazy-load-local-keys
+ '(("v" . er/expand-region))
+ creature/map "expand-region")
+
+
 (provide 'init-tools)

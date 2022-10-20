@@ -73,3 +73,6 @@
 [submodule "site-lisp/emacs-rime"]
 	path = site-lisp/emacs-rime
 	url = https://github.com/DogLooksGood/emacs-rime.git
+[submodule "site-lisp/expand-region"]
+	path = site-lisp/expand-region
+	url = https://github.com/magnars/expand-region.el.git
