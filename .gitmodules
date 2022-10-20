@@ -67,3 +67,6 @@
 [submodule "site-lisp/auto-yasnippet"]
 	path = site-lisp/auto-yasnippet
 	url = https://github.com/abo-abo/auto-yasnippet.git
+[submodule "site-lisp/posframe"]
+	path = site-lisp/posframe
+	url = https://github.com/tumashu/posframe.git
