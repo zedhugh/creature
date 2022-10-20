@@ -19,4 +19,16 @@
           "朗道汉英字典5.0")))
 
 
+(require 'yasnippet)
+(require 'yasnippet-snippets)
+
+(defun fix-lisp-comment-snippets ()
+  "Fix strange behavior about comment snippets in lisp."
+  (setq-local comment-start ";;"))
+
+(add-hook 'emacs-lisp-mode-hook #'fix-lisp-comment-snippets)
+
+(add-hook 'prog-mode-hook #'yas-minor-mode)
+
+
 (provide 'init-tools)
