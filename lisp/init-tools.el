@@ -70,4 +70,9 @@
  creature/map "expand-region")
 
 
+(lazy-load-global-keys
+ '(("C-c s" . rg-menu))
+ "rg")
+
+
 (provide 'init-tools)

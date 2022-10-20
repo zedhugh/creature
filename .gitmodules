@@ -76,3 +76,9 @@
 [submodule "site-lisp/expand-region"]
 	path = site-lisp/expand-region
 	url = https://github.com/magnars/expand-region.el.git
+[submodule "site-lisp/rg"]
+	path = site-lisp/rg
+	url = https://github.com/dajva/rg.el.git
+[submodule "site-lisp/Emacs-wgrep"]
+	path = site-lisp/Emacs-wgrep
+	url = https://github.com/mhayashi1120/Emacs-wgrep.git
