@@ -104,6 +104,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (add-to-list 'load-path creature/pkg-dir t)
 (add-subdirs-to-load-path creature/pkg-dir)
 
+
 (require 'init-built-in)
 (require 'init-git)
 (require 'init-edit)
@@ -112,12 +113,8 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (require 'init-keybindings)
 (require 'init-tools)
 (require 'init-ibuffer)
+(require 'init-which-key)
 
-(require 'which-key)
-(setq which-key-show-early-on-C-h t)
-(setq which-key-idle-delay 10000)
-(setq which-key-idle-secondary-delay 0.05)
-(which-key-mode 'toggle)
 
 (setq custom-file (expand-file-name "custom.el" creature/cache-dir))
 (when (file-exists-p custom-file)
