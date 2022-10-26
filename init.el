@@ -117,6 +117,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (require 'init-ibuffer)
 (require 'init-which-key)
 (require 'init-editorconfig)
+(require 'init-typescript)
 
 
 (setq custom-file (expand-file-name "custom.el" creature/cache-dir))

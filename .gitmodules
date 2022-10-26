@@ -88,3 +88,6 @@
 [submodule "site-lisp/editorconfig-emacs"]
 	path = site-lisp/editorconfig-emacs
 	url = https://github.com/editorconfig/editorconfig-emacs.git
+[submodule "site-lisp/typescript"]
+	path = site-lisp/typescript
+	url = https://github.com/emacs-typescript/typescript.el.git
