@@ -107,7 +107,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 
 (require 'init-built-in)
 (require 'init-git)
-(require 'init-edit)
+(require 'init-awesome-pair)
 (require 'init-theme)
 (require 'init-vertico)
 (require 'init-keybindings)
