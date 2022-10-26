@@ -111,6 +111,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (require 'init-vertico)
 (require 'init-keybindings)
 (require 'init-tools)
+(require 'init-ibuffer)
 
 (require 'which-key)
 (setq which-key-show-early-on-C-h t)
