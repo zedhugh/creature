@@ -91,3 +91,12 @@
 [submodule "site-lisp/typescript"]
 	path = site-lisp/typescript
 	url = https://github.com/emacs-typescript/typescript.el.git
+[submodule "site-lisp/elisp-tree-sitter"]
+	path = site-lisp/elisp-tree-sitter
+	url = https://github.com/emacs-tree-sitter/elisp-tree-sitter.git
+[submodule "site-lisp/tree-sitter-langs"]
+	path = site-lisp/tree-sitter-langs
+	url = https://github.com/emacs-tree-sitter/tree-sitter-langs.git
+[submodule "site-lisp/tsi"]
+	path = site-lisp/tsi
+	url = https://github.com/orzechowskid/tsi.el.git
