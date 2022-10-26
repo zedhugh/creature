@@ -1,5 +1,26 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'lazy-load)
+
+;;; expand-region
+(lazy-load-local-keys
+ '(("v" . er/expand-region))
+ creature/map "expand-region")
+
+
+;;; rg
+(lazy-load-global-keys
+ '(("C-c s" . rg-menu))
+ "rg")
+
+
+;;; avy
+(lazy-load-local-keys
+ '(("jl" . avy-goto-line)
+   ("jw" . avy-goto-word-1))
+ creature/map "avy")
+
+
 ;;; mwim
 (lazy-load-global-keys
  '(("C-a" . mwim-beginning-of-code-or-line)
