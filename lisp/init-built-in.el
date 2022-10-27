@@ -79,8 +79,6 @@
 (electric-quote-mode 1)
 (electric-indent-mode 1)
 
-(setq backward-delete-char-untabify-method 'hungry)
-
 (with-eval-after-load 'dired
   (setq dired-dwim-target t)
 

@@ -50,7 +50,10 @@
 (lazy-load-set-keys
  '(("C-x k" . kill-this-buffer)
    ("C-x K" . kill-buffer)
-   ("C-M-\\" . creature/indent-region-or-buffer)))
+   ("C-M-\\" . creature/indent-region-or-buffer)
+   ("DEL" . backward-delete-char-untabify)))
+
+(setq backward-delete-char-untabify-method 'hungry)
 
 
 (lazy-load-set-keys
