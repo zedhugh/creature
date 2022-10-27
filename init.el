@@ -120,6 +120,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (require 'init-typescript)
 (require 'init-eglot)
 (require 'init-prettier)
+(require 'init-emmet)
 
 
 (setq custom-file (expand-file-name "custom.el" creature/cache-dir))

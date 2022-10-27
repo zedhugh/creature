@@ -115,3 +115,6 @@
 [submodule "site-lisp/s"]
 	path = site-lisp/s
 	url = https://github.com/magnars/s.el.git
+[submodule "site-lisp/emmet-mode"]
+	path = site-lisp/emmet-mode
+	url = https://github.com/smihica/emmet-mode.git
