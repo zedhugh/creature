@@ -100,3 +100,18 @@
 [submodule "site-lisp/tsi"]
 	path = site-lisp/tsi
 	url = https://github.com/orzechowskid/tsi.el.git
+[submodule "site-lisp/prettier"]
+	path = site-lisp/prettier
+	url = https://github.com/jscheid/prettier.el.git
+[submodule "site-lisp/iter2"]
+	path = site-lisp/iter2
+	url = https://github.com/doublep/iter2.git
+[submodule "site-lisp/nvm"]
+	path = site-lisp/nvm
+	url = https://github.com/rejeep/nvm.el.git
+[submodule "site-lisp/f"]
+	path = site-lisp/f
+	url = https://github.com/rejeep/f.el.git
+[submodule "site-lisp/s"]
+	path = site-lisp/s
+	url = https://github.com/magnars/s.el.git
