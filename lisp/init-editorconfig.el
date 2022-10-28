@@ -1,9 +1,16 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(require 'editorconfig)
+(autoload 'editorconfig-mode "editorconfig" "" t)
 
-(editorconfig-mode 1)
+(setq creature/editorconfig-timer
+      (run-with-idle-timer 5 nil #'editorconfig-mode))
 
-(setq creature/editorconfig-timer nil)
+(add-hook 'find-file-hook #'editorconfig-mode)
+
+(with-eval-after-load 'editorconfig
+  (remove-hook 'find-file-hook #'editorconfig-mode)
+  (cancel-timer creature/editorconfig-timer)
+  (makunbound 'creature/editorconfig-timer))
+
 
 (provide 'init-editorconfig)

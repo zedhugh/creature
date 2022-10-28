@@ -52,14 +52,26 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+
+(setq creature/recentf-mode-timer
+      (run-with-idle-timer 5 nil #'recentf-mode))
+
+(add-hook 'find-file-hook #'recentf-mode)
+
 (with-eval-after-load 'recentf
+  (remove-hook 'find-file-hook #'recentf-mode)
+  (cancel-timer creature/recentf-mode-timer)
+  (makunbound 'creature/recentf-mode-timer)
+
   (setq recentf-max-saved-items 1000)
   ;; (add-to-list 'recentf-exclude "bookmarks")
   (add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
   (add-to-list 'recentf-exclude "node_modules")
+  (add-to-list 'recentf-exclude "site-lisp")
 
   (with-eval-after-load 'package
     (add-to-list 'recentf-exclude (expand-file-name package-user-dir))))
+
 
 ;; Disable bell
 (setq visible-bell          nil
