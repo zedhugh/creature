@@ -124,3 +124,12 @@
 [submodule "site-lisp/eslint-disable-rule"]
 	path = site-lisp/eslint-disable-rule
 	url = https://github.com/DamienCassou/eslint-disable-rule.git
+[submodule "site-lisp/rainbow-identifiers"]
+	path = site-lisp/rainbow-identifiers
+	url = https://github.com/Fanael/rainbow-identifiers.git
+[submodule "site-lisp/rainbow-delimiters"]
+	path = site-lisp/rainbow-delimiters
+	url = https://github.com/Fanael/rainbow-delimiters.git
+[submodule "site-lisp/circadian"]
+	path = site-lisp/circadian
+	url = https://github.com/guidoschmidt/circadian.el.git
