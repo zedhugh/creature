@@ -10,9 +10,6 @@
   creature/map
   "b"  "buffer"
   "c"  "comments"
-  "e"  "errors"
-  "el" "lines"
-  "ex" "error message"
   "f"  "files"
   "g"  "magit"
   "gf" "magit files"
