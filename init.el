@@ -128,9 +128,6 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (when (file-exists-p custom-file)
   (load custom-file 'noerror))
 
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (message (emacs-init-time))))
 
 (with-eval-after-load 'package
   (add-to-list 'package-archives '("melpa"  . "https://melpa.org/packages/")))

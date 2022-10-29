@@ -14,3 +14,23 @@
 
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
+
+
+(defun creature/welcom-message ()
+  (let (init-time startup-time)
+    (setq init-time (time-since before-init-time))
+    (setq startup-time
+          (time-subtract after-init-time before-init-time))
+    (setq initial-scratch-message
+          (format ";; startup: %fs -- init: %fs\n\
+;; Happy hacking %s - Emacs loves you.\n\n"
+                  (float-time startup-time)
+                  (float-time init-time)
+                  (or (user-login-name) "user"))))
+
+  (with-current-buffer "*scratch*"
+    (erase-buffer)
+    (insert initial-scratch-message)
+    (set-buffer-modified-p nil)))
+
+(add-hook 'emacs-startup-hook #'creature/welcom-message 1999)
