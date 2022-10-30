@@ -18,8 +18,8 @@
 
 (defun creature/welcom-message ()
   (let (init-time startup-time)
-    (setq init-time (time-since before-init-time))
-    (setq startup-time
+    (setq startup-time (time-since before-init-time))
+    (setq init-time
           (time-subtract after-init-time before-init-time))
     (setq initial-scratch-message
           (format ";; startup: %fs -- init: %fs\n\
