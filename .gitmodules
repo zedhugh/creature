@@ -160,3 +160,12 @@
 [submodule "site-lisp/nginx-mode"]
 	path = site-lisp/nginx-mode
 	url = https://github.com/ajc/nginx-mode.git
+[submodule "site-lisp/pdf-tools"]
+	path = site-lisp/pdf-tools
+	url = https://github.com/vedang/pdf-tools.git
+[submodule "site-lisp/tablist"]
+	path = site-lisp/tablist
+	url = https://github.com/politza/tablist.git
+[submodule "site-lisp/saveplace-pdf-view"]
+	path = site-lisp/saveplace-pdf-view
+	url = https://github.com/nicolaisingh/saveplace-pdf-view.git

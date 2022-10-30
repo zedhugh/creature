@@ -26,6 +26,22 @@
    . nginx-mode))
 
 
+(autoload 'pdf-tools-install "pdf-tools" "" t)
+(autoload 'pdf-sync-minor-mode "pdf-sync" "" t)
+(autoload 'pdf-annot-minor-mode "pdf-annot" "" t)
+(autoload 'pdf-links-minor-mode "pdf-links" "" t)
+(autoload 'pdf-history-minor-mode "pdf-history" "" t)
+(autoload 'pdf-outline-minor-mode "pdf-outline" "" t)
+(autoload 'pdf-occur-global-minor-mode "pdf-occur" "" t)
+(require 'pdf-loader)
+(pdf-loader-install t t t)
+
+(with-eval-after-load 'pdf-view
+  (require 'saveplace-pdf-view))
+(with-eval-after-load 'pdf-view
+  (add-hook 'pdf-view-mode-hook #'pdf-view-themed-minor-mode))
+
+
 (add-to-list 'auto-mode-alist '("package\\.env\\'"             . conf-mode))
 (add-to-list 'auto-mode-alist '("package\\.use\\'"             . conf-mode))
 (add-to-list 'auto-mode-alist '("package\\.mask\\'"            . conf-mode))

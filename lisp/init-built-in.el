@@ -39,7 +39,7 @@
                                       extended-command-history))
 
 ;; Record cursor position for file
-(save-place-mode)
+(save-place-mode 1)
 
 ;; Delete file directly
 (setq delete-by-moving-to-trash t)
