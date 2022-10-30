@@ -106,6 +106,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 
 
 (require 'init-built-in)
+(require 'init-modeline)
 (require 'init-git)
 (require 'init-awesome-pair)
 (require 'init-theme)
