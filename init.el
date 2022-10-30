@@ -122,6 +122,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (require 'init-prettier)
 (require 'init-emmet)
 (require 'init-flymake)
+(require 'init-org)
 
 
 (setq custom-file (expand-file-name "custom.el" creature/cache-dir))

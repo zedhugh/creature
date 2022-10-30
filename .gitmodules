@@ -133,3 +133,18 @@
 [submodule "site-lisp/circadian"]
 	path = site-lisp/circadian
 	url = https://github.com/guidoschmidt/circadian.el.git
+[submodule "site-lisp/tomelr"]
+	path = site-lisp/tomelr
+	url = https://github.com/kaushalmodi/tomelr.git
+[submodule "site-lisp/ox-hugo"]
+	path = site-lisp/ox-hugo
+	url = https://github.com/kaushalmodi/ox-hugo.git
+[submodule "site-lisp/org-pomodoro"]
+	path = site-lisp/org-pomodoro
+	url = https://github.com/marcinkoziej/org-pomodoro.git
+[submodule "site-lisp/alert"]
+	path = site-lisp/alert
+	url = https://github.com/jwiegley/alert.git
+[submodule "site-lisp/gntp"]
+	path = site-lisp/gntp
+	url = https://github.com/tekai/gntp.el.git
