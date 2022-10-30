@@ -148,3 +148,15 @@
 [submodule "site-lisp/gntp"]
 	path = site-lisp/gntp
 	url = https://github.com/tekai/gntp.el.git
+[submodule "site-lisp/vimrc-mode"]
+	path = site-lisp/vimrc-mode
+	url = https://github.com/mcandre/vimrc-mode.git
+[submodule "site-lisp/yaml-mode"]
+	path = site-lisp/yaml-mode
+	url = https://github.com/yoshiki/yaml-mode.git
+[submodule "site-lisp/lua-mode"]
+	path = site-lisp/lua-mode
+	url = https://github.com/immerrr/lua-mode.git
+[submodule "site-lisp/nginx-mode"]
+	path = site-lisp/nginx-mode
+	url = https://github.com/ajc/nginx-mode.git
