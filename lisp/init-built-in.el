@@ -68,6 +68,7 @@
   (add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
   (add-to-list 'recentf-exclude "node_modules")
   (add-to-list 'recentf-exclude "site-lisp")
+  (add-to-list 'recentf-exclude "\\.gpg\\'")
 
   (with-eval-after-load 'package
     (add-to-list 'recentf-exclude (expand-file-name package-user-dir))))
