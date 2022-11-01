@@ -1,5 +1,8 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(global-set-key (kbd "C-c '") (kbd "`"))
+
+
 (require 'lazy-load)
 
 ;;; expand-region

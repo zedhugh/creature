@@ -17,15 +17,7 @@
   (lazy-load-set-keys
    '(("ex" . flymake-show-diagnostic)
      ("el" . creature/flymake-show-diagnostics-buffer-and-jump))
-   flymake-mode-map creature/prefix-key)
-
-  (with-eval-after-load 'which-key
-    (which-key-add-keymap-based-replacements
-      flymake-mode-map
-      "e"  "errors"
-      "el" "lines"
-      "ex" "error message"
-      )))
+   flymake-mode-map creature/prefix-key))
 
 
 (autoload 'eslint-disable-rule-disable-next-line "eslint-disable-rule" "" t)
