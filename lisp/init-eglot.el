@@ -14,7 +14,14 @@
      ("C-c o" . eglot-code-actions))
    eglot-mode-map))
 
-(dolist (hook '(css-mode-hook js-mode-hook typescript-mode-hook))
+
+;; json mode is derived from `js-mode', but json file don't need `eglot'
+(add-hook 'js-mode-hook
+          (lambda ()
+            (unless (derived-mode-p 'js-json-mode 'json-mode)
+              (eglot-ensure))))
+
+(dolist (hook '(css-mode-hook typescript-mode-hook))
   (add-hook hook #'eglot-ensure))
 
 
