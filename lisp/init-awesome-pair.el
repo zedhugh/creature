@@ -42,7 +42,16 @@
 (defun creature/awesome-pair-kill-template-string-curly-content ()
   (interactive)
   (save-excursion
-    (kill-region (point) (progn (search-forward "}") (1- (point))))))
+    (kill-region (point) (save-excursion (search-forward "}") (1- (point))))))
+
+(defun creature/in-elisp-string-symbol ()
+  (when (and (derived-mode-p 'emacs-lisp-mode))
+    (let ((faces (get-text-property (point) 'face)))
+      (and (listp faces)
+           (memq 'font-lock-constant-face faces)
+           (or (memq 'font-lock-doc-face faces)
+               (memq 'font-lock-string-face faces)
+               (memq 'font-lock-comment-face faces))))))
 
 (defun creature/awesome-pair-kill ()
   (interactive)
@@ -50,6 +59,11 @@
               (creature/awesome-pair-in-template-string-p)
               (awesome-pair-in-curly-p))
          (creature/awesome-pair-kill-template-string-curly-content))
+        ((creature/in-elisp-string-symbol)
+         (kill-region (point)
+                      (save-excursion
+                        (search-forward "'" (pos-eol))
+                        (1- (point)))))
         (t
          (funcall-interactively #'awesome-pair-kill))))
 
