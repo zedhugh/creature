@@ -88,7 +88,6 @@
       x-gtk-use-system-tooltips nil)    ; no gtk tooltips
 
 (electric-pair-mode 1)
-(electric-quote-mode 1)
 (electric-indent-mode 1)
 
 (with-eval-after-load 'dired

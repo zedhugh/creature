@@ -3,7 +3,7 @@
 (autoload 'prettier-mode "prettier" "" t)
 
 (defun creature/prettier-setup ()
-  "Enable ‘prettier-mode’ selectively."
+  "Enable `prettier-mode' selectively."
   (when (and prettier-mode
              (or (not prettier-version) (prettier--in-node-modules-p)))
     (prettier-mode -1)))
