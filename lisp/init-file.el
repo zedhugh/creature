@@ -50,8 +50,4 @@
 (add-to-list 'auto-mode-alist '("package\\.accept_keywords\\'" . conf-mode))
 
 
-;; auto save files
-(auto-save-visited-mode 1)
-
-
 (provide 'init-file)

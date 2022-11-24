@@ -47,6 +47,8 @@
 ;; No backup file
 (setq make-backup-files nil)
 
+(global-auto-revert-mode 1)
+
 ;; Auto save file
 (setq auto-save-default t)
 (setq auto-save-file-name-transforms
@@ -92,6 +94,8 @@
 (electric-indent-mode 1)
 
 (with-eval-after-load 'dired
+  (require 'dired-x)
+  
   (setq dired-dwim-target t)
 
   ;; show file size human readable
@@ -103,6 +107,10 @@
 
   ;; don't make too many dired buffer
   (put 'dired-find-alternate-file 'disabled nil))
+
+
+(unless (featurep 'server) (require 'server))
+(unless (server-running-p) (server-start))
 
 
 (provide 'init-built-in)
