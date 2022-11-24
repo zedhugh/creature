@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: react function component template in javascript
+# key: rfj
+# --
+const $1 = (${2:props}) => {
+  return (
+    $0
+  );
+};
+
+export default $1;

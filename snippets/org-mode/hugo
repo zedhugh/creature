@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: hugo
+# key: hh
+# --
+#+hugo_base_dir: $1
+#+hugo_section: ${2:post}
+#+hugo_auto_set_lastmod: t
+#+author:
+#+hugo_custom_front_matter: :author $3
+$0

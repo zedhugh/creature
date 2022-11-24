@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: prettier ignore import
+# key: pioi
+# --
+// organize-imports-ignore

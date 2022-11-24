@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: prettier ignore comment
+# key: pi
+# --
+prettier-ignore
