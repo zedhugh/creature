@@ -32,6 +32,10 @@
   (add-hook 'prog-mode-hook mode))
 
 
+(global-whitespace-mode 1)
+(setq whitespace-style '(tabs space-after-tab tab-mark))
+
+
 (require 'circadian)
 (when (and (fboundp 'circadian-setup)
            (custom-theme-name-valid-p 'modus-vivendi))
