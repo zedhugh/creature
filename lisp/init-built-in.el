@@ -93,6 +93,8 @@
 (electric-pair-mode 1)
 (electric-indent-mode 1)
 
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+
 (with-eval-after-load 'dired
   (require 'dired-x)
   
