@@ -169,3 +169,6 @@
 [submodule "site-lisp/saveplace-pdf-view"]
 	path = site-lisp/saveplace-pdf-view
 	url = https://github.com/nicolaisingh/saveplace-pdf-view.git
+[submodule "site-lisp/ace-window"]
+	path = site-lisp/ace-window
+	url = https://github.com/abo-abo/ace-window.git
