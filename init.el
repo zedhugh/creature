@@ -127,6 +127,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (require 'init-file)
 (require 'init-proxy)
 (require 'init-irc)
+(require 'init-mail)
 
 
 (setq custom-file (expand-file-name "custom.el" creature/cache-dir))
