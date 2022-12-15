@@ -49,5 +49,7 @@
 (add-to-list 'auto-mode-alist '("package\\.keywords\\'"        . conf-mode))
 (add-to-list 'auto-mode-alist '("package\\.accept_keywords\\'" . conf-mode))
 
+(add-to-list 'auto-mode-alist '("\\.[cm]js\\'" . js-mode))
+
 
 (provide 'init-file)
