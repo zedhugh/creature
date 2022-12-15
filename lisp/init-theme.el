@@ -33,8 +33,24 @@
 
 
 (global-whitespace-mode 1)
-(setq whitespace-style '(tabs space-after-tab tab-mark))
+(setq whitespace-style
+      '(tabs
+        trailing
+        lines
+        space-before-tab
+        newline
+        indentation
+        empty
+        space-after-tab
+        tab-mark
+        missing-newline-at-eof))
 
+(defun creature/show-trailing-whitespace ()
+  (when (buffer-file-name)
+    (setq show-trailing-whitespace t)))
+(add-hook 'find-file-hook #'creature/show-trailing-whitespace)
+
+(blink-cursor-mode -1)
 
 (require 'circadian)
 (when (and (fboundp 'circadian-setup)
