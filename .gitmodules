@@ -175,3 +175,6 @@
 [submodule "site-lisp/markdown-mode"]
 	path = site-lisp/markdown-mode
 	url = https://github.com/jrblevin/markdown-mode.git
+[submodule "site-lisp/emacs-websocket"]
+	path = site-lisp/emacs-websocket
+	url = https://github.com/ahyatt/emacs-websocket.git
