@@ -7,7 +7,8 @@
  "magit")
 
 (lazy-load-local-keys
- '(("gc"  . magit-clone)
+ '(("gb"  . magit-blame)
+   ("gc"  . magit-clone)
    ("gff" . magit-find-file)
    ("gfc" . magit-find-git-config-file)
    ("gfs" . magit-stage-file)
