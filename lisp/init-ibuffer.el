@@ -4,6 +4,7 @@
       '(("Default"
          ("ERC" (mode . erc-mode))
          ("Org" (mode . org-mode))
+         ("Dired" (mode . dired-mode))
          ("Elisp" (mode . emacs-lisp-mode))
          ("Magit" (name . "^magit[:-].*$"))
          ("TypeScript" (mode . typescript-mode))
