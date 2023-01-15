@@ -55,7 +55,10 @@
 
 (defun creature/awesome-pair-kill ()
   (interactive)
-  (cond ((and (derived-mode-p 'js-mode 'typescript-mode 'web-mode)
+  (cond ((and (derived-mode-p 'js-mode
+                              'typescript-mode
+                              'typescript-ts-base-mode
+                              'web-mode)
               (creature/awesome-pair-in-template-string-p)
               (awesome-pair-in-curly-p))
          (creature/awesome-pair-kill-template-string-curly-content))

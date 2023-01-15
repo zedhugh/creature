@@ -88,17 +88,17 @@
 [submodule "site-lisp/editorconfig-emacs"]
 	path = site-lisp/editorconfig-emacs
 	url = https://github.com/editorconfig/editorconfig-emacs.git
-[submodule "site-lisp/typescript"]
-	path = site-lisp/typescript
+[submodule "optional-pkg/typescript"]
+	path = optional-pkg/typescript
 	url = https://github.com/emacs-typescript/typescript.el.git
-[submodule "site-lisp/elisp-tree-sitter"]
-	path = site-lisp/elisp-tree-sitter
+[submodule "optional-pkg/elisp-tree-sitter"]
+	path = optional-pkg/elisp-tree-sitter
 	url = https://github.com/emacs-tree-sitter/elisp-tree-sitter.git
-[submodule "site-lisp/tree-sitter-langs"]
-	path = site-lisp/tree-sitter-langs
+[submodule "optional-pkg/tree-sitter-langs"]
+	path = optional-pkg/tree-sitter-langs
 	url = https://github.com/emacs-tree-sitter/tree-sitter-langs.git
-[submodule "site-lisp/tsi"]
-	path = site-lisp/tsi
+[submodule "optional-pkg/tsi"]
+	path = optional-pkg/tsi
 	url = https://github.com/orzechowskid/tsi.el.git
 [submodule "site-lisp/prettier"]
 	path = site-lisp/prettier

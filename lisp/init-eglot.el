@@ -21,7 +21,11 @@
             (unless (derived-mode-p 'js-json-mode 'json-mode)
               (eglot-ensure))))
 
-(dolist (hook '(css-mode-hook typescript-mode-hook c-mode-hook c++-mode-hook))
+(dolist (hook '(css-mode-hook
+                typescript-mode-hook
+                typescript-ts-base-mode-hook
+                c-mode-hook
+                c++-mode-hook))
   (add-hook hook #'eglot-ensure))
 
 

@@ -33,7 +33,10 @@
 
   (when (and flymake-mode
              (not creature/eslint-inited)
-             (derived-mode-p 'js-mode 'typescript-mode 'web-mode))
+             (derived-mode-p 'js-mode
+                             'typescript-mode
+                             'typescript-ts-base-mode
+                             'web-mode))
 
     ;; flymake-eslint-enable 内部会再次调用 (flymake-mode 1) ，为防止无限
     ;; 循环调用，用 ‘creature/eslint-inited’ 记录该函数调用状态避免多次调用

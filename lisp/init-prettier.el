@@ -21,7 +21,10 @@
   (add-to-list 'prettier-major-mode-parsers
                '(js-json-mode . creature/prettier-json-parser)))
 
-(dolist (hook '(css-mode-hook js-mode-hook typescript-mode-hook))
+(dolist (hook '(css-mode-hook
+                js-mode-hook
+                typescript-mode-hook
+                typescript-ts-base-mode-hook))
   (add-hook hook #'prettier-mode))
 
 (provide 'init-prettier)
