@@ -3,13 +3,14 @@
 (autoload 'editorconfig-mode "editorconfig" "" t)
 
 (defun creature/editorconfig-setup ()
+  (editorconfig-mode 1)
+  ;; 修复通过打开文件启动该插件时打开的文件缩进配置不对
+  (editorconfig-mode-apply)
+  (remove-hook 'find-file-hook #'creature/editorconfig-setup)
+
   ;; 防止多次执行时因为定时器被清除而报错
   (when (and (boundp 'creature/editorconfig-timer)
              (timerp creature/editorconfig-timer))
-    (editorconfig-mode 1)
-    ;; 修复通过打开文件启动该插件时打开的文件缩进配置不对
-    (editorconfig-mode-apply)
-    (remove-hook 'find-file-hook #'creature/editorconfig-setup)
     (cancel-timer creature/editorconfig-timer)
     (makunbound 'creature/editorconfig-timer)))
 
