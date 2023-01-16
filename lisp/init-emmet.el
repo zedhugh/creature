@@ -9,6 +9,7 @@
                 web-mode-hook
                 html-mode-hook
                 js-jsx-mode-hook
+                tsx-ts-mode-hook
                 typescript-tsx-mode-hook))
   (add-hook hook #'emmet-mode))
 
