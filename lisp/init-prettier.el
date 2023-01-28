@@ -23,6 +23,7 @@
 
 (dolist (hook '(css-mode-hook
                 js-base-mode-hook
+                json-ts-mode-hook
                 typescript-mode-hook
                 typescript-ts-base-mode-hook))
   (add-hook hook #'prettier-mode))
