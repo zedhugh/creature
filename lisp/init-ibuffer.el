@@ -16,7 +16,7 @@
                         (mode . js-mode)
                         (mode . js-jsx-mode)))
          ("TSX" (or (mode . typescript-tsx-mode)
-                     (basename . "^.*\\.tsx$")))
+                    (basename . "^.*\\.tsx$")))
          ("Web" (mode . web-mode))
 
          ("eglot" (name . "^\\*EGLOT.*events\\*$"))

@@ -1,6 +1,12 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(unless (and (fboundp 'treesit-available-p) (treesit-available-p))
+(if (bound-and-true-p creature/treesit-available)
+    (progn
+      (if (treesit-ready-p 'typescript)
+          (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode)))
+      (if (treesit-ready-p 'tsx)
+          (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))))
+
   (add-subdirs-to-load-path (expand-file-name "optional-pkg" creature/config-dir))
   (require 'typescript-mode)
 
@@ -20,8 +26,6 @@
   (with-eval-after-load 'tree-sitter-langs
     (tree-sitter-require 'tsx)
     (add-to-list 'tree-sitter-major-mode-language-alist '(typescript-tsx-mode . tsx))))
-
-
 
 
 (provide 'init-typescript)

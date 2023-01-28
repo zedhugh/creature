@@ -97,7 +97,7 @@
 
 (with-eval-after-load 'dired
   (require 'dired-x)
-  
+
   (setq dired-dwim-target t)
 
   ;; show file size human readable
