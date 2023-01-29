@@ -3,7 +3,10 @@
 (autoload 'emmet-mode "emmet-mode" "" t)
 
 (with-eval-after-load 'emmet-mode
-  (setq emmet-self-closing-tag-style " /"))
+  (setq emmet-self-closing-tag-style " /")
+
+  (dolist (mode '(js-jsx-mode typescript-tsx-mode tsx-ts-mode))
+    (add-to-list 'emmet-jsx-major-modes mode)))
 
 (dolist (hook '(css-mode-hook
                 web-mode-hook
