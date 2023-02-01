@@ -33,7 +33,7 @@
 
   (when (and flymake-mode
              (not creature/eslint-inited)
-             (derived-mode-p 'js-mode
+             (derived-mode-p 'js-base-mode
                              'typescript-mode
                              'typescript-ts-base-mode
                              'web-mode))
