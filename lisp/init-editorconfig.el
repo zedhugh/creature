@@ -24,5 +24,8 @@
 (add-to-list 'auto-mode-alist
              '("\\.editorconfig\\'" . editorconfig-conf-mode))
 
+(with-eval-after-load 'editorconfig
+  (add-to-list 'editorconfig-indentation-alist '(js-ts-mode js-indent-level)))
+
 
 (provide 'init-editorconfig)
