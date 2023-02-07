@@ -35,18 +35,21 @@
     (let* ((node (treesit-node-at (point)))
            (node-type (treesit-node-type node))
            (start nil)
-           (end nil))
+           (end nil)
+           (pos nil))
       (when (string= node-type "string_fragment")
         (setq start (treesit-node-start node)
-              end (treesit-node-end node))
+              end (treesit-node-end node)
+              pos (point))
         (save-restriction
           (save-excursion
             (goto-char start)
-            (backward-delete-char 1)
+            (delete-char -1)
             (insert "`")
             (goto-char end)
             (delete-char 1)
-            (insert "`")))))))
+            (insert "`")))
+        (goto-char pos)))))
 
 (with-eval-after-load 'js
   (define-key js-ts-mode-map (kbd "C-c '") #'creature/treesit-convert-to-template))
