@@ -4,11 +4,14 @@
   (and (fboundp 'treesit-available-p) (treesit-available-p))
   "Built-in `treesit' available.")
 
-(when (and (fboundp 'treesit-available-p) (treesit-available-p))
+(when creature/treesit-available
   (unless (featurep 'treesit) (require 'treesit))
   (when (treesit-ready-p 'javascript)
     (add-to-list 'major-mode-remap-alist '(js-mode . js-ts-mode))
-    (add-to-list 'major-mode-remap-alist '(javascript-mode . js-ts-mode))))
+    (add-to-list 'major-mode-remap-alist '(javascript-mode . js-ts-mode)))
+
+  (when (treesit-ready-p 'cmake)
+    (add-to-list 'major-mode-remap-alist '(cmake-mode . cmake-ts-mode))))
 
 
 (provide 'init-treesit)
