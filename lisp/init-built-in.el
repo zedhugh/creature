@@ -110,6 +110,11 @@
   ;; don't make too many dired buffer
   (put 'dired-find-alternate-file 'disabled nil))
 
+(add-hook 'display-fill-column-indicator-mode-hook
+          (lambda ()
+            (setq fill-column 80)))
+
+(add-hook 'c-mode-common-hook #'display-fill-column-indicator-mode)
 
 (unless (featurep 'server) (require 'server))
 (unless (server-running-p) (server-start))
