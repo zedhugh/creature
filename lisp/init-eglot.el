@@ -24,6 +24,9 @@
 (dolist (hook '(css-mode-hook
                 typescript-mode-hook
                 typescript-ts-base-mode-hook
+                sh-mode-hook
+                bash-ts-mode
+                cmake-mode-hook
                 c-mode-hook
                 c++-mode-hook))
   (add-hook hook #'eglot-ensure))
