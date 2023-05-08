@@ -6,6 +6,7 @@
   (setq eglot-events-buffer-size 0)
   (setq eglot-confirm-server-initiated-edits nil)
   (setq eglot-autoshutdown t)
+  (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
 
   (lazy-load-set-keys
    '(("M-." . xref-find-definitions)
