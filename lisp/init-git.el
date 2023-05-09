@@ -46,4 +46,8 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 
+(with-eval-after-load 'project
+  (require 'magit))
+
+
 (provide 'init-git)
