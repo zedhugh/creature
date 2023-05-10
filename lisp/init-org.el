@@ -1,10 +1,18 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-treesit)
+
 ;; customize mode for src lang
 (defconst creature/org-src-lang-modes
-  '(("js"   . js)
-    ("ts"   . typescript)
-    ("html" . web))
+  (if (bound-and-true-p creature/treesit-available)
+      '(("js"   . js)
+        ("ts"   . typescript-ts)
+        ("tsx"  . tsx-ts)
+        ("html" . mhtml))
+    '(("js"   . js)
+      ("ts"   . typescript)
+      ("tsx"  . typescript-tsx)
+      ("html" . mhtml)))
   "Better src lang reflex to mode.")
 
 ;; enable code block in org file
