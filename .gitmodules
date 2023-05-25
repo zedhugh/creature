@@ -178,3 +178,6 @@
 [submodule "site-lisp/emacs-websocket"]
 	path = site-lisp/emacs-websocket
 	url = https://github.com/ahyatt/emacs-websocket.git
+[submodule "site-lisp/emms"]
+	path = site-lisp/emms
+	url = https://git.savannah.gnu.org/git/emms.git

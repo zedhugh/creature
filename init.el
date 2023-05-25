@@ -131,6 +131,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (require 'init-mail)
 (require 'init-ace-window)
 (require 'init-markdown)
+(require 'init-media)
 
 
 (setq custom-file (expand-file-name "custom.el" creature/cache-dir))
