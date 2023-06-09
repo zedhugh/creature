@@ -2,11 +2,20 @@
 
 (require 'lazy-load)
 
+(defun creature/eglot-load-markdown-for-doc ()
+  (when (and (fboundp 'eglot-managed-p)
+             (eglot-managed-p)
+             (not (featurep 'markdown-mode))
+             (locate-library "markdown-mode"))
+    (require 'markdown-mode)))
+
 (with-eval-after-load 'eglot
   (setq eglot-events-buffer-size 0)
   (setq eglot-confirm-server-initiated-edits nil)
   (setq eglot-autoshutdown t)
   (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
+
+  (add-hook 'eglot-managed-mode-hook #'creature/eglot-load-markdown-for-doc)
 
   (lazy-load-set-keys
    '(("M-." . xref-find-definitions)
