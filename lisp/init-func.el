@@ -88,5 +88,19 @@
 
     (creature/fallback-indent-func)))
 
+(defvar creature/drink-timer nil
+  "Timer for drink water notifition.")
+(defun creature/start-drink-timer ()
+  "Start timer for notice drink water."
+  (interactive)
+  (when (timerp creature/drink-timer)
+    (cancel-timer creature/drink-timer)
+    (setq creature/drink-timer nil))
+  (setq creature/drink-timer
+        (run-with-timer 1800 1800
+                        (lambda ()
+                          (require 'alert)
+                          (alert-notifications-notify '(:title "该喝水啦！！！" :persistent 1))))))
+
 
 (provide 'init-func)
