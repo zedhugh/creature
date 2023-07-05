@@ -97,7 +97,7 @@
     (cancel-timer creature/drink-timer)
     (setq creature/drink-timer nil))
   (setq creature/drink-timer
-        (run-with-timer 1800 1800
+        (run-with-timer 1200 1200
                         (lambda ()
                           (require 'alert)
                           (alert-notifications-notify '(:title "该喝水啦！！！" :persistent 1))))))
