@@ -52,13 +52,6 @@
 
 (blink-cursor-mode -1)
 
-(require 'circadian)
-(when (and (fboundp 'circadian-setup)
-           (custom-theme-name-valid-p 'modus-vivendi))
-  (setq circadian-themes '(("08:00" . modus-operandi)
-                           ("18:00" . modus-vivendi)))
-  (circadian-setup))
-
 
 (defconst creature/font-config
   ;; '(("Operator Mono Book" . 16))
