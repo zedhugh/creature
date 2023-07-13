@@ -100,7 +100,9 @@
         (run-with-timer 1200 1200
                         (lambda ()
                           (require 'alert)
-                          (alert-notifications-notify '(:title "该喝水啦！！！" :persistent 1))))))
+                          (let ((msg (format-time-string "drink time: %Y-%m-%d %H:%M:%S")))
+                            (alert-notifications-notify `(:title ,msg :persistent 1)))
+                          ))))
 
 
 (provide 'init-func)
