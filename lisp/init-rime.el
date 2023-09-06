@@ -8,9 +8,6 @@
 (setq rime-show-candidate 'posframe)
 (setq rime-posframe-style 'simple)
 (setq rime-posframe-fixed-position t)
-(setq rime-disable-predicates
-      '(rime-predicate-prog-in-code-p
-        rime-predicate-hydra-p))
 
 (lazy-load-set-keys
  '(("M-i" . rime-force-enable))
