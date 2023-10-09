@@ -29,6 +29,13 @@
       (eglot--highlight-piggyback cb)
       t)))
 
+(defun creature/eglot-c-mode-keybinding ()
+  (when (derived-mode-p 'c-mode 'c++-mode 'c-ts-mode 'c++-ts-mode)
+    (make-local-variable 'eglot-mode-map)
+    (lazy-load-set-keys
+     '(("C-M-\\" . eglot-format))
+     eglot-mode-map)))
+
 (with-eval-after-load 'eglot
   (setq eglot-events-buffer-size 0)
   (setq eglot-confirm-server-initiated-edits nil)
@@ -36,6 +43,7 @@
   (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
 
   (add-hook 'eglot-managed-mode-hook #'creature/eglot-load-markdown-for-doc)
+  (add-hook 'eglot-managed-mode-hook #'creature/eglot-c-mode-keybinding)
 
   ;; variable `eglot-prefer-plaintext' invoked in eglot-1.14
   ;; and document only show one line by eldoc since eglot-1.14
@@ -63,7 +71,8 @@
                 bash-ts-mode
                 cmake-mode-hook
                 c-mode-hook
-                c++-mode-hook))
+                c++-mode-hook
+                c-ts-base-mode-hook))
   (add-hook hook #'eglot-ensure))
 
 

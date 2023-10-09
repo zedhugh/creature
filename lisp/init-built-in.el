@@ -115,6 +115,7 @@
             (setq fill-column 80)))
 
 (add-hook 'c-mode-common-hook #'display-fill-column-indicator-mode)
+(add-hook 'c-ts-base-mode-hook #'display-fill-column-indicator-mode)
 
 (unless (featurep 'server) (require 'server))
 (unless (server-running-p) (server-start))
