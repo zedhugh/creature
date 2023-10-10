@@ -2,6 +2,9 @@
 
 (autoload 'prettier-mode "prettier" "" t)
 
+(defvar-local creature/formatter nil
+  "Formatter for buffer.")
+
 (defun creature/prettier-setup ()
   "Enable `prettier-mode' selectively."
   (when (and prettier-mode
@@ -16,8 +19,15 @@
       '(json-stringify json json5)
     '(json json5 json-stringify)))
 
+(defun creature/prettier-set-formatter ()
+  (setq creature/formatter
+        (if (bound-and-true-p prettier-mode)
+            'creature/indent-region-or-buffer
+          nil)))
+
 (with-eval-after-load 'prettier
   (add-hook 'prettier-mode-hook #'creature/prettier-setup)
+  (add-hook 'prettier-mode-hook #'creature/prettier-set-formatter)
   (add-to-list 'prettier-major-mode-parsers
                '(js-json-mode . creature/prettier-json-parser)))
 
