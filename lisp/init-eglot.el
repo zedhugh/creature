@@ -67,7 +67,7 @@
                 typescript-mode-hook
                 typescript-ts-base-mode-hook
                 sh-mode-hook
-                bash-ts-mode
+                bash-ts-mode-hook
                 cmake-mode-hook
                 c-mode-hook
                 c++-mode-hook
