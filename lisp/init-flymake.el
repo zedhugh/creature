@@ -25,14 +25,14 @@
 (autoload 'eslint-disable-rule-flycheck "eslint-disable-rule-flycheck")
 
 
-(defvar creature/eslint-inited nil)
+(defvar-local creature/eslint-inited nil
+  "Eslint inited for buffer.")
 
 (autoload 'flymake-eslint-enable "flymake-eslint" "" t)
 (defun creature/flymake-add-eslint-backend ()
-  (make-local-variable 'creature/eslint-inited)
-
   (when (and flymake-mode
              (not creature/eslint-inited)
+             (not (derived-mode-p 'js-json-mode 'json-mode 'json-ts-mode))
              (derived-mode-p 'js-base-mode
                              'typescript-mode
                              'typescript-ts-base-mode

@@ -60,7 +60,7 @@
 ;; json mode is derived from `js-mode', but json file don't need `eglot'
 (add-hook 'js-base-mode-hook
           (lambda ()
-            (unless (derived-mode-p 'js-json-mode 'json-mode)
+            (unless (derived-mode-p 'js-json-mode 'json-mode 'json-ts-mode)
               (eglot-ensure))))
 
 (dolist (hook '(css-mode-hook
