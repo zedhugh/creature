@@ -6,7 +6,27 @@
   (select-window
    (get-buffer-window (flymake--diagnostics-buffer-name))))
 
+(defcustom flymake-disabled-for-js/ts-in-dirnames nil
+  "Disable `flymake-mode' in js/ts file in these directories."
+  :type '(repeat string))
+
+(defun creature/file-in-dir (filepath dirname)
+  (and filepath
+       (seq-contains-p (file-name-split filepath) dirname)))
+
+(defun creature/flymake-need-disabled ()
+  (and flymake-mode
+       (derived-mode-p 'js-base-mode 'typescript-ts-base-mode 'typescript-mode)
+       (cl-some (lambda (dir)
+                  (creature/file-in-dir buffer-file-name dir))
+                flymake-disabled-for-js/ts-in-dirnames)))
+
+(defun creature/flymake-disable-in-compiled-js/ts-file ()
+  (when (creature/flymake-need-disabled)
+    (flymake-mode -1)))
+
 (with-eval-after-load 'flymake
+  (add-hook 'flymake-mode-hook #'creature/flymake-disable-in-compiled-js/ts-file)
   (add-hook 'flymake-mode-hook #'creature/flymake-add-eslint-backend)
 
   (lazy-load-set-keys
