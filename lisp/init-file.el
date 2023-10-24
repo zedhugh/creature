@@ -56,5 +56,17 @@
 (add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
 (add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
 
+;; optimize performance of long-line files
+(setq-default bidi-display-reordering t)
+(setq bidi-inhibit-bpa t
+      long-line-threshold 200
+      large-hscroll-threshold 200
+      syntax-wholeline-max 200)
+
+(with-eval-after-load 'so-long
+  (setq so-long-threshold 200))
+(when (fboundp 'global-so-long-mode)
+    (global-so-long-mode 1))
+
 
 (provide 'init-file)
