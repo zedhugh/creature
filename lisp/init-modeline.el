@@ -108,7 +108,7 @@ orgiin is in `creature/origin-mode-line-format'."
     nil))
 
 ;; (setq display-time-interval 1)
-(setq display-time-format " %R %a %F")
+(setq display-time-format " %H:%M")
 (setq display-time-load-average nil)
 (setq display-time-default-load-average nil)
 (display-time-mode)
