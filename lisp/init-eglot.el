@@ -35,6 +35,18 @@
       (funcall creature/formatter)
     (eglot-format)))
 
+(defun creature/disable-eglot-for-json ()
+  "JSON mode is derived from `js-mode', but json file don't need `eglot'."
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      (when (and (eglot-managed-p)
+                 (derived-mode-p 'js-json-mode 'json-mode 'json-ts-mode))
+        (run-with-timer 0 nil
+                        (lambda ()
+                          (with-current-buffer buffer
+                            (flymake-mode -1)
+                            (eglot--managed-mode-off))))))))
+
 (with-eval-after-load 'eglot
   (setq eglot-events-buffer-size 0)
   (setq eglot-confirm-server-initiated-edits nil)
@@ -42,6 +54,7 @@
   (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
 
   (add-hook 'eglot-managed-mode-hook #'creature/eglot-load-markdown-for-doc)
+  (add-hook 'eglot-managed-mode-hook #'creature/disable-eglot-for-json)
 
   ;; variable `eglot-prefer-plaintext' invoked in eglot-1.14
   ;; and document only show one line by eldoc since eglot-1.14
@@ -57,13 +70,8 @@
    eglot-mode-map))
 
 
-;; json mode is derived from `js-mode', but json file don't need `eglot'
-(add-hook 'js-base-mode-hook
-          (lambda ()
-            (unless (derived-mode-p 'js-json-mode 'json-mode 'json-ts-mode)
-              (eglot-ensure))))
-
 (dolist (hook '(css-mode-hook
+                js-base-mode-hook
                 typescript-mode-hook
                 typescript-ts-base-mode-hook
                 sh-mode-hook
