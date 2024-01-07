@@ -41,4 +41,14 @@
   (recentf-mode 1))
 
 
+(defun creature/load-corfu-terminal-in-no-gui-env ()
+  (unless (display-graphic-p)
+    (require 'corfu-terminal)
+    (require 'corfu-doc-terminal)
+    (corfu-terminal-mode 1)
+    (corfu-doc-terminal-mode 1)))
+
+(add-hook 'emacs-startup-hook #'creature/load-corfu-terminal-in-no-gui-env)
+(add-hook 'server-after-make-frame-hook #'creature/load-corfu-terminal-in-no-gui-env)
+
 (provide 'init-vertico)

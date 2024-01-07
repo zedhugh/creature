@@ -178,3 +178,12 @@
 [submodule "site-lisp/emms"]
 	path = site-lisp/emms
 	url = https://git.savannah.gnu.org/git/emms.git
+[submodule "site-lisp/emacs-corfu-terminal"]
+	path = site-lisp/emacs-corfu-terminal
+	url = https://codeberg.org/akib/emacs-corfu-terminal.git
+[submodule "site-lisp/emacs-popon"]
+	path = site-lisp/emacs-popon
+	url = https://codeberg.org/akib/emacs-popon.git
+[submodule "site-lisp/emacs-corfu-doc-terminal"]
+	path = site-lisp/emacs-corfu-doc-terminal
+	url = https://codeberg.org/akib/emacs-corfu-doc-terminal.git
