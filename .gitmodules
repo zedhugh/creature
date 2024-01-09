@@ -118,9 +118,6 @@
 [submodule "site-lisp/emmet-mode"]
 	path = site-lisp/emmet-mode
 	url = https://github.com/smihica/emmet-mode.git
-[submodule "site-lisp/flymake-eslint"]
-	path = site-lisp/flymake-eslint
-	url = https://github.com/orzechowskid/flymake-eslint.git
 [submodule "site-lisp/eslint-disable-rule"]
 	path = site-lisp/eslint-disable-rule
 	url = https://github.com/DamienCassou/eslint-disable-rule.git
@@ -187,3 +184,6 @@
 [submodule "site-lisp/emacs-corfu-doc-terminal"]
 	path = site-lisp/emacs-corfu-doc-terminal
 	url = https://codeberg.org/akib/emacs-corfu-doc-terminal.git
+[submodule "site-lisp/emacs-flymake-eslint"]
+	path = site-lisp/emacs-flymake-eslint
+	url = https://github.com/zedhugh/emacs-flymake-eslint.git

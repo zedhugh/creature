@@ -44,48 +44,31 @@
 (autoload 'eslint-disable-rule-flymake "eslint-disable-rule-flymake")
 (autoload 'eslint-disable-rule-flycheck "eslint-disable-rule-flycheck")
 
+(autoload 'emacs-flymake-eslint-enable "emacs-flymake-eslint" "" t)
+(autoload 'emacs-flymake-eslint--checker "emacs-flymake-eslint" "" t)
 
-(defvar-local creature/eslint-inited nil
-  "Eslint inited for buffer.")
+(defun eslint-disable-rule--emacs-flymake-eslint-active-p ()
+  "Return non nil if `flymake-eslint' is enabled in the current buffer."
+  (and
+   (featurep 'flymake)
+   (or (featurep 'flymake-eslint)
+       (featurep 'emacs-flymake-eslint))
+   flymake-mode
+   (member eslint-disable-rule-flymake--checker-fn flymake-diagnostic-functions)))
 
-(autoload 'flymake-eslint-enable "flymake-eslint" "" t)
+(with-eval-after-load 'eslint-disable-rule-flymake
+  (setq eslint-disable-rule-flymake--checker-fn #'emacs-flymake-eslint--checker)
+  (advice-add 'eslint-disable-rule-flymake--eslint-active-p
+              :override #'eslint-disable-rule--emacs-flymake-eslint-active-p))
+
 (defun creature/flymake-add-eslint-backend ()
   (when (and flymake-mode
-             (not creature/eslint-inited)
              (not (derived-mode-p 'js-json-mode 'json-mode 'json-ts-mode))
              (derived-mode-p 'js-base-mode
                              'typescript-mode
                              'typescript-ts-base-mode
                              'web-mode))
-
-    ;; flymake-eslint-enable 内部会再次调用 (flymake-mode 1) ，为防止无限
-    ;; 循环调用，用 ‘creature/eslint-inited’ 记录该函数调用状态避免多次调用
-    (setq creature/eslint-inited t)
-
-    (flymake-eslint-enable)
-    (setq flymake-eslint-project-root
-          (creature/flymake-eslint-find-work-dir))))
-
-(defun creature/flymake-eslint-find-work-dir ()
-  (let ((max-len 0)
-        (curr-len 0)
-        (temp-dir nil)
-        (work-dir nil))
-    (dolist (filename '(".eslintrc"
-                        ".eslintrc.js"
-                        ".eslintrc.cjs"
-                        ".eslintrc.yaml"
-                        ".eslintrc.yml"
-                        ".eslintrc.json"
-                        "package.json"))
-      (setq temp-dir (locate-dominating-file buffer-file-name filename))
-      (when (stringp temp-dir)
-        (setq curr-len (string-bytes (file-truename temp-dir)))
-
-        (when (> curr-len max-len)
-          (setq max-len curr-len
-                work-dir temp-dir))))
-    work-dir))
+    (emacs-flymake-eslint-enable)))
 
 
 (provide 'init-flymake)
