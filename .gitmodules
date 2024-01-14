@@ -12,7 +12,7 @@
 	url = https://github.com/magit/with-editor.git
 [submodule "site-lisp/compat"]
 	path = site-lisp/compat
-	url = https://git.sr.ht/~pkal/compat
+	url = https://github.com/emacs-compat/compat.git
 [submodule "site-lisp/lazy-load"]
 	path = site-lisp/lazy-load
 	url = https://github.com/manateelazycat/lazy-load.git
