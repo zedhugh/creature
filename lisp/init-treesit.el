@@ -10,6 +10,9 @@
     (add-to-list 'major-mode-remap-alist '(js-mode . js-ts-mode))
     (add-to-list 'major-mode-remap-alist '(javascript-mode . js-ts-mode)))
 
+  (when (treesit-ready-p 'json)
+    (add-to-list 'major-mode-remap-alist '(js-json-mode . json-ts-mode)))
+
   (when (treesit-ready-p 'c)
     (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode)))
   (when (treesit-ready-p 'cpp)
