@@ -187,3 +187,6 @@
 [submodule "site-lisp/emacs-flymake-eslint"]
 	path = site-lisp/emacs-flymake-eslint
 	url = https://github.com/zedhugh/emacs-flymake-eslint.git
+[submodule "site-lisp/plantuml-mode"]
+	path = site-lisp/plantuml-mode
+	url = https://github.com/skuro/plantuml-mode.git

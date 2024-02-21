@@ -25,7 +25,8 @@
              '("\\.editorconfig\\'" . editorconfig-conf-mode))
 
 (with-eval-after-load 'editorconfig
-  (add-to-list 'editorconfig-indentation-alist '(js-ts-mode js-indent-level)))
+  (add-to-list 'editorconfig-indentation-alist '(js-ts-mode js-indent-level))
+  (add-to-list 'editorconfig-indentation-alist '(plantuml-mode plantuml-indent-level)))
 
 
 (provide 'init-editorconfig)

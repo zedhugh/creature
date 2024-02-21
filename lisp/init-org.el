@@ -22,6 +22,7 @@
     (latex      . t)
     (shell      . t)
     (python     . t)
+    (plantuml   . t)
     (emacs-lisp . t))
   "Enabled lang in org src code block.")
 
@@ -78,6 +79,9 @@
 (with-eval-after-load 'ox
   (setq org-export-preserve-breaks t)
   (require 'ox-hugo))
+
+(with-eval-after-load 'ob-plantuml
+  (setq org-plantuml-exec-mode 'plantuml))
 
 
 (provide 'init-org)
