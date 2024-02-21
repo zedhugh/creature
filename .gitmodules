@@ -190,3 +190,6 @@
 [submodule "site-lisp/plantuml-mode"]
 	path = site-lisp/plantuml-mode
 	url = https://github.com/skuro/plantuml-mode.git
+[submodule "site-lisp/graphviz-dot-mode"]
+	path = site-lisp/graphviz-dot-mode
+	url = https://github.com/ppareit/graphviz-dot-mode.git

@@ -26,7 +26,8 @@
 
 (with-eval-after-load 'editorconfig
   (add-to-list 'editorconfig-indentation-alist '(js-ts-mode js-indent-level))
-  (add-to-list 'editorconfig-indentation-alist '(plantuml-mode plantuml-indent-level)))
+  (add-to-list 'editorconfig-indentation-alist '(plantuml-mode plantuml-indent-level))
+  (add-to-list 'editorconfig-indentation-alist '(graphviz-dot-mode graphviz-dot-indent-width)))
 
 
 (provide 'init-editorconfig)

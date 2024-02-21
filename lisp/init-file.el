@@ -56,6 +56,10 @@
 (add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
 (add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
 
+(autoload 'graphviz-dot-mode "graphviz-dot-mode" "" t)
+(add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
+(add-to-list 'auto-mode-alist '("\\.gv\\'" . graphviz-dot-mode))
+
 ;; optimize performance of long-line files
 (setq-default bidi-display-reordering t)
 (setq bidi-inhibit-bpa t
