@@ -68,9 +68,9 @@
       syntax-wholeline-max 200)
 
 (with-eval-after-load 'so-long
-  (setq so-long-threshold 200))
+  (setq so-long-threshold 5000))
 (when (fboundp 'global-so-long-mode)
-    (global-so-long-mode 1))
+  (global-so-long-mode 1))
 
 
 (provide 'init-file)
