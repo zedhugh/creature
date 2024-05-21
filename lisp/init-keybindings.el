@@ -51,7 +51,7 @@
 
 (require 'init-func)
 (lazy-load-set-keys
- '(("C-x k" . kill-this-buffer)
+ '(("C-x k" . creature/kill-this-buffer)
    ("C-x K" . kill-buffer)
    ("C-M-\\" . creature/indent-region-or-buffer)
    ("DEL" . backward-delete-char-untabify)))

@@ -104,5 +104,10 @@
                             (alert-notifications-notify `(:title ,msg :persistent 1)))
                           ))))
 
+(defun creature/kill-this-buffer ()
+  "Kill the current buffer quietly."
+  (interactive)
+  (kill-buffer (current-buffer)))
+
 
 (provide 'init-func)
