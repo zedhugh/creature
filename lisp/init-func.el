@@ -99,9 +99,9 @@
   (setq creature/drink-timer
         (run-with-timer 1200 1200
                         (lambda ()
-                          (require 'alert)
+                          (require 'notifications)
                           (let ((msg (format-time-string "drink time: %Y-%m-%d %H:%M:%S")))
-                            (alert-notifications-notify `(:title ,msg :persistent 1)))
+                            (notifications-notify :title msg :timeout 0 :app-icon nil))
                           ))))
 
 (defun creature/kill-this-buffer ()
