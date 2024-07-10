@@ -10,13 +10,14 @@
 (setq rime-posframe-fixed-position t)
 
 (lazy-load-set-keys
- '(("M-i" . rime-force-enable))
+ '(("M-i" . rime-select-schema))
  rime-mode-map)
 
 (lazy-load-set-keys
  '(("M-i" . rime-inline-ascii)
    ("M-o" . rime--backspace)
-   ("M-h" . rime--escape))
+   ("M-h" . rime--escape)
+   ("C-S-<return>" . rime-send-keybinding))
  rime-active-mode-map)
 
 
