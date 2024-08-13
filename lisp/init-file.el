@@ -42,12 +42,21 @@
   (add-hook 'pdf-view-mode-hook #'pdf-view-themed-minor-mode))
 
 
-(add-to-list 'auto-mode-alist '("package\\.env\\'"             . conf-mode))
-(add-to-list 'auto-mode-alist '("package\\.use\\'"             . conf-mode))
-(add-to-list 'auto-mode-alist '("package\\.mask\\'"            . conf-mode))
-(add-to-list 'auto-mode-alist '("package\\.license\\'"         . conf-mode))
-(add-to-list 'auto-mode-alist '("package\\.keywords\\'"        . conf-mode))
-(add-to-list 'auto-mode-alist '("package\\.accept_keywords\\'" . conf-mode))
+;; (add-to-list 'auto-mode-alist '("package\\.env\\'"             . conf-mode))
+;; (add-to-list 'auto-mode-alist '("package\\.use\\'"             . conf-mode))
+;; (add-to-list 'auto-mode-alist '("package\\.mask\\'"            . conf-mode))
+;; (add-to-list 'auto-mode-alist '("package\\.license\\'"         . conf-mode))
+;; (add-to-list 'auto-mode-alist '("package\\.keywords\\'"        . conf-mode))
+;; (add-to-list 'auto-mode-alist '("package\\.accept_keywords\\'" . conf-mode))
+(add-to-list 'auto-mode-alist
+             '("/\\(package\\.\\(mask\\|unmask\\|use\\|env\
+\\|license\\|properties\\|accept_\\(keywords\\|restrict\\)\\)\
+\\|\\(package\\.\\)?use.\\(stable\\.\\)?\\(force\\|mask\\)\\)\\'"
+               . conf-space-mode))
+(add-to-list 'auto-mode-alist
+             '("/package\\.\\(mask\\|unmask\\|use\\|env\
+\\|accept_\\(keywords\\|restrict\\)\\)/.*\\'"
+               . conf-space-mode))
 
 (add-to-list 'auto-mode-alist '("\\.[cm]js\\'" . js-mode))
 
