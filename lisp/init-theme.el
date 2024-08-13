@@ -6,7 +6,7 @@
 
 (defun creature/pulse-line (&rest _)
   "Pulse the current line."
-  (when creature/pulse-enable
+  (when (and creature/pulse-enable (display-graphic-p))
     (pulse-momentary-highlight-one-line (point))))
 
 ;; pulse setup, like beacon
