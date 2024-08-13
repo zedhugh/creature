@@ -38,8 +38,8 @@
 
 (with-eval-after-load 'pdf-view
   (require 'saveplace-pdf-view))
-(with-eval-after-load 'pdf-view
-  (add-hook 'pdf-view-mode-hook #'pdf-view-themed-minor-mode))
+;; (with-eval-after-load 'pdf-view
+;;   (add-hook 'pdf-view-mode-hook #'pdf-view-themed-minor-mode))
 
 
 ;; (add-to-list 'auto-mode-alist '("package\\.env\\'"             . conf-mode))
