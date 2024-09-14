@@ -6,6 +6,7 @@
  '(("C-x g" . magit-status))
  "magit")
 
+(require 'init-keybindings)
 (lazy-load-local-keys
  '(("gb"  . magit-blame)
    ("gc"  . magit-clone)

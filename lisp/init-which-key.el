@@ -1,5 +1,7 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-keybindings)
+
 (require 'which-key)
 (setq which-key-show-early-on-C-h t)
 (setq which-key-idle-delay 10000)

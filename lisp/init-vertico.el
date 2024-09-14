@@ -34,6 +34,7 @@
  "cape")
 
 
+(require 'init-keybindings)
 (lazy-load-local-keys
  '(("fr" . consult-recent-file))
  creature/map "consult")

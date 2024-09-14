@@ -3,6 +3,7 @@
 (require 'lazy-load)
 
 
+(require 'init-keybindings)
 (lazy-load-local-keys
  '(("s" . sdcv-search-pointer))
  creature/map "sdcv")

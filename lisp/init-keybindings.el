@@ -1,5 +1,12 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(defconst creature/prefix-key "M-m"
+  "Prefix key for custom keybindings.")
+
+(define-prefix-command 'creature/map)
+(global-set-key (kbd creature/prefix-key) 'creature/map)
+
+
 (global-set-key (kbd "C-c '") (kbd "`"))
 
 

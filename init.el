@@ -58,12 +58,6 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
   (expand-file-name ".cache" creature/config-dir)
   "Cache directory of Creature.")
 
-(defconst creature/prefix-key "M-m"
-  "Prefix key for custom keybindings.")
-
-(define-prefix-command 'creature/map)
-(global-set-key (kbd creature/prefix-key) 'creature/map)
-
 (defconst creature/pkg-dir
   (expand-file-name "site-lisp" creature/config-dir)
   "Package directory.")

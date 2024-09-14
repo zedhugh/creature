@@ -34,6 +34,7 @@
      ("C-c C-p" . flymake-goto-prev-error))
    flymake-mode-map)
 
+  (require 'init-keybindings)
   (lazy-load-set-keys
    '(("ex" . flymake-show-diagnostic)
      ("el" . creature/flymake-show-diagnostics-buffer-and-jump))
