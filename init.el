@@ -69,40 +69,40 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
   "Package directory.")
 
 (require 'cl-lib)
+(require 'subr-x)
 
-(defun add-subdirs-to-load-path (search-dir)
-  (interactive)
-  (let* ((dir (file-name-as-directory search-dir)))
-    (dolist (subdir
-             ;; 过滤出不必要的目录，提升Emacs启动速度
-             (cl-remove-if
-              #'(lambda (subdir)
-                  (or
-                   ;; 不是目录的文件都移除
-                   (not (file-directory-p (concat dir subdir)))
-                   ;; 父目录、 语言相关和版本控制目录都移除
-                   (member subdir '("." ".."
-                                    "dist" "node_modules" "__pycache__"
-                                    "RCS" "CVS" "rcs" "cvs" ".git" ".github"))))
-              (directory-files dir)))
-      (let ((subdir-path (concat dir (file-name-as-directory subdir))))
-        ;; 目录下有 .el .so .dll 文件的路径才添加到 `load-path' 中，提升Emacs启动速度
-        (when (cl-some #'(lambda (subdir-file)
-                           (and (file-regular-p (concat subdir-path subdir-file))
-                                ;; .so .dll 文件指非Elisp语言编写的Emacs动态库
-                                (member (file-name-extension subdir-file) '("el" "so" "dll"))))
-                       (directory-files subdir-path))
+(defun add-dir-and-subdirs-to-load-path (dir)
+  "Add directory and its subdirectoris to `load-path'.
+Detect whether there are any loadable module in DIR, if so, add DIR to `load-path'.
+Do this recursively for subdirectories of DIR."
+  (unless (file-directory-p dir)
+    (error "%s is not a directory" dir))
 
-          ;; 注意：`add-to-list' 函数的第三个参数必须为 t ，表示加到列表末尾
-          ;; 这样Emacs会从父目录到子目录的顺序搜索Elisp插件，顺序反过来会导致Emacs无法正常启动
-          (add-to-list 'load-path subdir-path t))
+  (let ((subdirs nil)
+        (files nil)
+        (temp-filepath nil)
+        ;; (loadable-suffixes (get-load-suffixes))
+        (load-extension (mapcar (lambda (str) (string-remove-prefix "." str)) load-suffixes))
+        (exclude-dirs '("." ".."
+                        "dist" "node_modules" "__pycache__"
+                        "RCS" "CVS" "rcs" "cvs" ".git" ".github")))
 
-        ;; 继续递归搜索子目录
-        (add-subdirs-to-load-path subdir-path)))))
+    (dolist (filename (directory-files dir))
+      (setq temp-filepath (file-name-concat dir filename))
+      (if (file-directory-p temp-filepath)
+          (unless (member filename exclude-dirs)
+            (add-to-list 'subdirs temp-filepath t))
+        (when (file-regular-p temp-filepath)
+          (add-to-list 'files temp-filepath t))))
+
+    (when (cl-some (lambda (file)
+                     (member (file-name-extension file) load-extension))
+                   files)
+      (add-to-list 'load-path dir t))
+    (mapc #'add-dir-and-subdirs-to-load-path subdirs)))
 
 (add-to-list 'load-path (expand-file-name "lisp" creature/config-dir) t)
-(add-to-list 'load-path creature/pkg-dir t)
-(add-subdirs-to-load-path creature/pkg-dir)
+(add-dir-and-subdirs-to-load-path creature/pkg-dir)
 
 
 (require 'init-built-in)
