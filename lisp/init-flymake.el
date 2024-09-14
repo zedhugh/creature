@@ -1,5 +1,9 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(add-pkg-in-pkg-dir "eslint-disable-rule")
+(add-pkg-in-pkg-dir "emacs-flymake-eslint")
+
 (defun creature/flymake-show-diagnostics-buffer-and-jump ()
   (interactive)
   (flymake-show-diagnostics-buffer)

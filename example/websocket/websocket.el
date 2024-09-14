@@ -1,5 +1,8 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(add-pkg-in-pkg-dir "emacs-websocket")
+
 (require 'websocket)
 
 (setq-local websocket-eldoc-callback nil)

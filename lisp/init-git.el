@@ -1,5 +1,11 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(add-pkg-in-pkg-dir "magit")
+(add-pkg-in-pkg-dir "dash")
+(add-pkg-in-pkg-dir "git-modes")
+(add-pkg-in-pkg-dir "with-editor")
+
 (require 'lazy-load)
 
 (lazy-load-global-keys

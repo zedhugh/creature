@@ -1,5 +1,9 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(unless (locate-library "which-key")
+  (add-pkg-in-pkg-dir "emacs-which-key"))
+
 (require 'init-keybindings)
 
 (require 'which-key)

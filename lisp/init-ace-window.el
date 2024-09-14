@@ -1,5 +1,11 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(add-pkg-in-pkg-dir "ace-window")
+(add-pkg-in-pkg-dir "posframe")
+(add-pkg-in-pkg-dir "avy")
+
+
 (require 'lazy-load)
 
 

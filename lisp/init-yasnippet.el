@@ -1,5 +1,10 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(add-pkg-in-pkg-dir "yasnippet")
+(add-pkg-in-pkg-dir "yasnippet-snippets")
+(add-pkg-in-pkg-dir "auto-yasnippet")
+
 (require 'lazy-load)
 (require 'yasnippet)
 (require 'yasnippet-snippets)

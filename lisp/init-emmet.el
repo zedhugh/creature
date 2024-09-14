@@ -1,5 +1,8 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(add-pkg-in-pkg-dir "emmet-mode")
+
 (autoload 'emmet-mode "emmet-mode" "" t)
 
 (with-eval-after-load 'emmet-mode

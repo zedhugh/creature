@@ -1,5 +1,9 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(unless (locate-library "editorconfig")
+  (add-pkg-in-pkg-dir "editorconfig-emacs"))
+
 (autoload 'editorconfig-mode "editorconfig" "" t)
 
 (defun creature/editorconfig-setup ()

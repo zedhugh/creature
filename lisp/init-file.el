@@ -1,5 +1,14 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(add-pkg-in-pkg-dir "vimrc-mode")
+(add-pkg-in-pkg-dir "yaml-mode")
+(add-pkg-in-pkg-dir "lua-mode")
+(add-pkg-in-pkg-dir "nginx-mode")
+(add-pkg-in-pkg-dir "pdf-tools")
+(add-pkg-in-pkg-dir "tablist")
+(add-pkg-in-pkg-dir "saveplace-pdf-view")
+(add-pkg-in-pkg-dir "graphviz-dot-mode")
 (autoload 'vimrc-mode "vimrc-mode" "" t)
 (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
 

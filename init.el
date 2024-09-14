@@ -58,45 +58,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
   (expand-file-name ".cache" creature/config-dir)
   "Cache directory of Creature.")
 
-(defconst creature/pkg-dir
-  (expand-file-name "site-lisp" creature/config-dir)
-  "Package directory.")
-
-(require 'cl-lib)
-(require 'subr-x)
-
-(defun add-dir-and-subdirs-to-load-path (dir)
-  "Add directory and its subdirectoris to `load-path'.
-Detect whether there are any loadable module in DIR, if so, add DIR to `load-path'.
-Do this recursively for subdirectories of DIR."
-  (unless (file-directory-p dir)
-    (error "%s is not a directory" dir))
-
-  (let ((subdirs nil)
-        (files nil)
-        (temp-filepath nil)
-        ;; (loadable-suffixes (get-load-suffixes))
-        (load-extension (mapcar (lambda (str) (string-remove-prefix "." str)) load-suffixes))
-        (exclude-dirs '("." ".."
-                        "dist" "node_modules" "__pycache__"
-                        "RCS" "CVS" "rcs" "cvs" ".git" ".github")))
-
-    (dolist (filename (directory-files dir))
-      (setq temp-filepath (file-name-concat dir filename))
-      (if (file-directory-p temp-filepath)
-          (unless (member filename exclude-dirs)
-            (add-to-list 'subdirs temp-filepath t))
-        (when (file-regular-p temp-filepath)
-          (add-to-list 'files temp-filepath t))))
-
-    (when (cl-some (lambda (file)
-                     (member (file-name-extension file) load-extension))
-                   files)
-      (add-to-list 'load-path dir t))
-    (mapc #'add-dir-and-subdirs-to-load-path subdirs)))
-
 (add-to-list 'load-path (expand-file-name "lisp" creature/config-dir) t)
-(add-dir-and-subdirs-to-load-path creature/pkg-dir)
 
 
 (require 'init-built-in)

@@ -1,5 +1,9 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(add-pkg-in-pkg-dir "rainbow-delimiters")
+(add-pkg-in-pkg-dir "rainbow-identifiers")
+
 ;; Pulse
 (defvar creature/pulse-enable t
   "Whether enable pulse for scroll and switch window.")

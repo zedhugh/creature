@@ -1,5 +1,9 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(add-pkg-in-pkg-dir "sdcv")
+(add-pkg-in-pkg-dir "posframe")
+
 (require 'lazy-load)
 
 

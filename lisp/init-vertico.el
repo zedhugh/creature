@@ -1,5 +1,19 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(add-pkg-in-pkg-dir "marginalia")
+(add-pkg-in-pkg-dir "vertico")
+(add-pkg-in-pkg-dir "corfu")
+(add-pkg-in-pkg-dir "orderless")
+(add-pkg-in-pkg-dir "corfu-doc")
+(add-pkg-in-pkg-dir "cape")
+(add-pkg-in-pkg-dir "consult")
+(add-pkg-in-pkg-dir "emacs-corfu-terminal")
+(add-pkg-in-pkg-dir "emacs-popon")
+(add-pkg-in-pkg-dir "emacs-corfu-doc-terminal")
+(add-pkg-in-pkg-dir "embark")
+
+
 (require 'marginalia)
 (marginalia-mode 1)
 

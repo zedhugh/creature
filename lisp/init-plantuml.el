@@ -1,5 +1,9 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'init-package)
+(add-pkg-in-pkg-dir "plantuml-mode")
+(add-pkg-in-pkg-dir "dash")
+
 (autoload 'plantuml-mode "plantuml-mode" "" t)
 (add-to-list 'auto-mode-alist '("\\.\\(plantuml\\|pum\\|plu\\)\\'" . plantuml-mode))
 
