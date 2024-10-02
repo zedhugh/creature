@@ -89,6 +89,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (require 'init-markdown)
 (require 'init-media)
 (require 'init-plantuml)
+(require 'init-prisma)
 
 
 (setq custom-file (expand-file-name "custom.el" creature/cache-dir))

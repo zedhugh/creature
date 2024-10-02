@@ -193,3 +193,9 @@
 [submodule "site-lisp/graphviz-dot-mode"]
 	path = site-lisp/graphviz-dot-mode
 	url = https://github.com/ppareit/graphviz-dot-mode.git
+[submodule "site-lisp/prisma-ts-mode"]
+	path = site-lisp/prisma-ts-mode
+	url = https://github.com/nverno/prisma-ts-mode.git
+[submodule "tree-sitter-langs/tree-sitter-prisma"]
+	path = tree-sitter-langs/tree-sitter-prisma
+	url = https://github.com/victorhqc/tree-sitter-prisma.git
