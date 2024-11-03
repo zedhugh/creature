@@ -4,6 +4,9 @@
   (and (fboundp 'treesit-available-p) (treesit-available-p))
   "Built-in `treesit' available.")
 
+(setq treesit-extra-load-path
+      (list (file-name-concat creature/config-dir "tree-sitter")))
+
 (when creature/treesit-available
   (unless (featurep 'treesit) (require 'treesit))
   (when (treesit-ready-p 'javascript)

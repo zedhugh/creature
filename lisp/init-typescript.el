@@ -8,7 +8,7 @@
           (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
           (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode)))
 
-      (add-subdirs-to-load-path (expand-file-name "optional-pkg" creature/config-dir))
+      (add-dir-and-subdirs-to-load-path (expand-file-name "optional-pkg" creature/config-dir))
       (require 'typescript-mode)
 
       (define-derived-mode typescript-tsx-mode typescript-mode "Tsx"

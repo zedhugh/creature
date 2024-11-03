@@ -52,6 +52,6 @@ Do this recursively for subdirectories of DIR."
 ;; "compat" "transient"
 (dolist (pkg '("compat" "transient"))
   (unless (locate-library pkg)
-    (add-pkg-in-pkg-dir)))
+    (add-pkg-in-pkg-dir pkg)))
 
 (provide 'init-package)
