@@ -199,3 +199,6 @@
 [submodule "tree-sitter-langs/tree-sitter-prisma"]
 	path = tree-sitter-langs/tree-sitter-prisma
 	url = https://github.com/victorhqc/tree-sitter-prisma.git
+[submodule "site-lisp/gptel"]
+	path = site-lisp/gptel
+	url = https://github.com/karthink/gptel.git

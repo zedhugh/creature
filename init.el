@@ -90,6 +90,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (require 'init-media)
 (require 'init-plantuml)
 (require 'init-prisma)
+(require 'init-gptel)
 
 
 (setq custom-file (expand-file-name "custom.el" creature/cache-dir))
