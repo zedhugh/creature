@@ -202,3 +202,15 @@
 [submodule "site-lisp/gptel"]
 	path = site-lisp/gptel
 	url = https://github.com/karthink/gptel.git
+[submodule "site-lisp/nov"]
+	path = site-lisp/nov
+	url = https://depp.brause.cc/nov.el.git
+[submodule "site-lisp/esxml"]
+	path = site-lisp/esxml
+	url = https://github.com/tali713/esxml.git
+[submodule "site-lisp/emacs-kv"]
+	path = site-lisp/emacs-kv
+	url = https://github.com/nicferrier/emacs-kv.git
+[submodule "site-lisp/emacs-db"]
+	path = site-lisp/emacs-db
+	url = https://github.com/nicferrier/emacs-db.git
