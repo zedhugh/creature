@@ -11,23 +11,18 @@
 
 (defun creature/eglot-hover-eldoc-function (cb)
   "Multiple line version of `eglot-hover-eldoc-function'."
-  (let ((eglot-server-capable-fn
-         (if (fboundp 'eglot-server-capable)
-             'eglot-server-capable
-           'eglot--server-capable)))
-    (when (funcall eglot-server-capable-fn :hoverProvider)
-      (let ((buf (current-buffer)))
-        (jsonrpc-async-request
-         (eglot--current-server-or-lose)
-         :textDocument/hover (eglot--TextDocumentPositionParams)
-         :success-fn (eglot--lambda ((Hover) contents range)
-                       (eglot--when-buffer-window buf
-                         (let ((info (unless (seq-empty-p contents)
-                                       (eglot--hover-info contents range))))
-                           (funcall cb info :buffer t))))
-         :deferred :textDocument/hover))
-      (eglot--highlight-piggyback cb)
-      t)))
+  (when (eglot-server-capable :hoverProvider)
+    (let ((buf (current-buffer)))
+      (jsonrpc-async-request
+       (eglot--current-server-or-lose)
+       :textDocument/hover (eglot--TextDocumentPositionParams)
+       :success-fn (eglot--lambda ((Hover) contents range)
+                     (eglot--when-buffer-window buf
+                       (let ((info (unless (seq-empty-p contents)
+                                     (eglot--hover-info contents range))))
+                         (funcall cb info :buffer t))))
+       :deferred :textDocument/hover))
+    t))
 
 (defun creature/eglot-format ()
   (interactive)
