@@ -15,7 +15,10 @@
   (sdcv-say-word
    (if (region-active-p)
        (buffer-substring-no-properties (region-beginning) (region-end))
-     (word-at-point t))))
+     (let ((word (word-at-point t)))
+       (when (and (not word) (eq major-mode 'sdcv-mode))
+         (setq word sdcv-current-translate-object))
+       word))))
 
 (lazy-load-local-keys
  '(("s" . sdcv-search-pointer)
