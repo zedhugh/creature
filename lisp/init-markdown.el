@@ -2,6 +2,7 @@
 
 (require 'init-package)
 (add-pkg-in-pkg-dir "markdown-mode")
+(add-pkg-in-pkg-dir "edit-indirect")
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
