@@ -71,6 +71,8 @@
                 typescript-ts-base-mode-hook
                 sh-mode-hook
                 bash-ts-mode-hook
+                python-mode-hook
+                python-ts-mode-hook
                 cmake-mode-hook
                 c-mode-hook
                 c++-mode-hook

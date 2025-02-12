@@ -21,6 +21,9 @@
   (when (treesit-ready-p 'cpp)
     (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode)))
 
+  (when (treesit-ready-p 'python)
+    (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
+
   (when (treesit-ready-p 'cmake)
     (add-to-list 'major-mode-remap-alist '(cmake-mode . cmake-ts-mode))))
 
