@@ -5,6 +5,7 @@
 (add-pkg-in-pkg-dir "dash")
 (add-pkg-in-pkg-dir "git-modes")
 (add-pkg-in-pkg-dir "with-editor")
+(add-pkg-in-pkg-dir "llama")
 
 (require 'lazy-load)
 
