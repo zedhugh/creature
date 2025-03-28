@@ -11,7 +11,7 @@
 (defun creature/open-in-external-app (file-path)
   (if (eq system-type 'windows-nt)
       (w32-shell-execute "open" (replace-regexp-in-string "/" "\\\\" file-path))
-    (start-process "" nil "xdg-open" file-path)))
+    (call-process "xdg-open" nil 0 nil file-path)))
 
 (defun creature/open-file-or-directory-in-external-app (arg)
   (interactive "P")
