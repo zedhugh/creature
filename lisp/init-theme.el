@@ -17,12 +17,15 @@
 (with-eval-after-load 'pulse
   (setq pulse-delay 0.04))
 
-(dolist (command '(scroll-up
-                   scroll-down
-                   recenter))
-  (advice-add command :after #'creature/pulse-line))
-(add-to-list 'window-selection-change-functions #'creature/pulse-line)
-
+(let ((prefer-hl-line-mode-than-pulse t))
+  (if prefer-hl-line-mode-than-pulse
+      (global-hl-line-mode 1)
+    (progn
+      (dolist (command '(scroll-up
+                         scroll-down
+                         recenter))
+        (advice-add command :after #'creature/pulse-line))
+      (add-to-list 'window-selection-change-functions #'creature/pulse-line))))
 
 ;; address style
 (add-hook 'erc-mode-hook #'goto-address-mode)
