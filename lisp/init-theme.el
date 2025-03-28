@@ -96,8 +96,8 @@ if FRAME is nil, setup for current frame."
                (font-spec :family family :size size) frame)
             (error nil)))))))
 
-(add-hook 'emacs-startup-hook #'creature/fontset)
-(add-hook 'server-after-make-frame-hook #'creature/fontset)
+;; (add-hook 'emacs-startup-hook #'creature/fontset)
+;; (add-hook 'server-after-make-frame-hook #'creature/fontset)
 
 
 (provide 'init-theme)
