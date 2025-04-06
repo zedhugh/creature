@@ -61,6 +61,8 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (add-to-list 'load-path (expand-file-name "lisp" creature/config-dir) t)
 
 
+(when (eq system-type 'android)
+  (require 'init-android))
 (require 'init-built-in)
 (require 'init-treesit)
 (require 'init-modeline)
