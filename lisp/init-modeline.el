@@ -1,21 +1,8 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(defun creature/set-mode-line-format-for-exist-buffers ()
-  "Make customized mode line works in exist buffers."
-  (mapc (lambda (buffer)
-          (with-current-buffer buffer
-            (setq mode-line-format creature/mode-line-format)))
-        (buffer-list)))
-
-
 ;; buffer name
-(defvar creature/mode-line-buffer-name
-  '(:eval (propertize
-           "%b"
-           'face 'mode-line-buffer-id))
-  "Buffer name with face.")
-(set-face-attribute 'mode-line-buffer-id nil :weight 'normal)
-(put 'creature/mode-line-buffer-name 'risky-local-variable t)
+(setq-default mode-line-buffer-identification
+              (propertized-buffer-identification "%b"))
 
 ;; marker region info
 (defvar creature/focus-window nil
@@ -35,79 +22,124 @@
             (line (- (line-number-at-pos (region-end))
                      (line-number-at-pos (region-beginning))
                      -1)))
-        (format " [%d|%d]" length line))))
+        (propertize
+         (format " [%d|%d]" length line)
+         'help-echo "Selected region info"))))
   "Length of marked string.")
 (put 'creature/mode-line-region-info 'risky-local-variable t)
 
-(defvar creature/mode-line-company-info
+(defvar creature/mode-line-region-info
   '(:eval
-    (when (and (not buffer-read-only)
-               (or (bound-and-true-p company-mode)
-                   (bound-and-true-p global-company-mode)))
-      company-lighter))
-  "Customize company lighter.")
-(put 'creature/mode-line-company-info 'risky-local-variable t)
+    (when (and (region-active-p) (eq creature/focus-window (selected-window)))
+      (let ((length (- (region-end) (region-beginning)))
+            (line (- (line-number-at-pos (region-end))
+                     (line-number-at-pos (region-beginning))
+                     -1)))
+        (propertize
+         (format " [%d|%d]" length line)
+         ))))
+  "Length of marked string.")
+(put 'creature/mode-line-region-info 'risky-local-variable t)
 
-;; combin mode line fromat
-(defvar creature/mode-line-format
-  '("%e"
-    creature/mode-line-window-number
-    " "
-    current-input-method-title
-    "%Z" ; coding system and eol type
-    "%*" ; read only buffer?
-    "%+" ; buffer modified?
-    "%@" ; buffer is in remote?
-    " "
-    creature/mode-line-buffer-name
-    " {"
-    "%p" ; percent of point in buffer
-    ","
-    "%I" ; buffer size
-    "}("
-    "%l,%c" ; line and column
-    ")"
-    " ("
-    mode-name ; major mode
-    mode-line-process
-    creature/mode-line-company-info
-    ")"
-    creature/mode-line-region-info
-    (vc-mode vc-mode)
+(defvar creature/mode-line-line-and-column
+  `(line-number-mode
+    (column-number-mode
+     (column-number-indicator-zero-based
+      (:propertize
+       mode-line-position-column-line-format
+       display (min-width (10.0))
+       ,@mode-line-position--column-line-properties)
+      (:propertize
+       (:eval (string-replace
+               "%c" "%C" (car mode-line-position-column-line-format)))
+       display (min-width (10.0))
+       ,@mode-line-position--column-line-properties))
+     (:propertize
+      mode-line-position-line-format
+      display (min-width (6.0))
+      ,@mode-line-position--column-line-properties))
+    (column-number-mode
+     (column-number-indicator-zero-based
+      (:propertize
+       mode-line-position-column-format
+       display (min-width (6.0))
+       ,@mode-line-position--column-line-properties)
+      (:propertize
+       (:eval (string-replace
+               "%c" "%C" (car mode-line-position-column-format)))
+       display (min-width (6.0))
+       ,@mode-line-position--column-line-properties))))
+  "Line number and column number of position.")
+(put 'creature/mode-line-line-and-column 'risky-local-variable t)
 
-    (flymake-mode flymake-mode-line-format)
-    mode-line-misc-info
-    mode-line-end-spaces
-    )
-  "Customized mode line format.")
+(defvar creature/mode-line-percent-size
+  '(:eval
+    (let* ((show-brace (and mode-line-percent-position size-indication-mode))
+           (begin-brace (if show-brace " {" " "))
+           (end-brace (if show-brace "}" ""))
+           (comma (if show-brace "," "")))
+      `(,begin-brace
+        (:propertize
+         ("" mode-line-percent-position)
+         local-map ,mode-line-column-line-number-mode-map
+         display (min-width (5.0))
+         mouse-face mode-line-highlight
+         ;; XXX needs better description
+         help-echo "Window Scroll Percentage
+mouse-1: Display Line and Column Mode Menu")
+        ,comma
+        (size-indication-mode
+         ,(propertize
+           "%I"
+           'local-map mode-line-column-line-number-mode-map
+           'mouse-face 'mode-line-highlight
+           ;; XXX needs better description
+           'help-echo "Size indication mode\n\
+mouse-1: Display Line and Column Mode Menu"))
+        ,end-brace)))
+  "Percent offset and buffer size.")
+(put 'creature/mode-line-percent-size 'risky-local-variable t)
 
-;; 1. define a variable to keep origin mode-line
-;; 2. make customized mode-line worked for exist buffers.
-(defvar creature/origin-mode-line-format
-  mode-line-format
-  "Keep origin `mode-line-format'")
+(setq mode-line-position
+      `(,creature/mode-line-percent-size
+        ,creature/mode-line-line-and-column))
 
-(setq-default mode-line-format creature/mode-line-format)
+(let ((mode-line
+       '("%e"
+         mode-line-front-space
+         (:propertize
+          ("" mode-line-mule-info mode-line-client mode-line-modified
+           mode-line-remote mode-line-window-dedicated)
+          display (min-width (6.0)))
+         mode-line-frame-identification
+         mode-line-buffer-identification
+         mode-line-position
+         creature/mode-line-region-info
+         " "
 
-(creature/set-mode-line-format-for-exist-buffers)
+         mode-line-modes
 
-(defun creature/toggle-mode-line ()
-  "Switch `mode-line-format' between customized and the origin.
-Customized is save in `creature/mode-line-format',
-orgiin is in `creature/origin-mode-line-format'."
+         (project-mode-line project-mode-line-format)
+         (vc-mode vc-mode)
 
-  (let ((tmp-mode-line
-         (if (eq mode-line-format creature/mode-line-format)
-             creature/origin-mode-line-format
-           creature/mode-line-format)))
-    (mapc (lambda (buffer)
-            (with-current-buffer buffer
-              (setq mode-line-format tmp-mode-line)))
-          (buffer-list))
-    (setq-default mode-line-format tmp-mode-line)
-    nil))
+         (flymake-mode flymake-mode-line-format)
+         mode-line-misc-info
+         mode-line-end-spaces)))
+  (setq-default mode-line-format mode-line))
 
-;; (setq display-time-interval 1)
+;; cursor position info
+(size-indication-mode 1)
+(line-number-mode 1)
+(column-number-mode 1)
+
+;; don't show minor modes exclude company-mode
+(if (not (boundp mode-line-collapse-minor-modes))
+    (progn
+      (setq mode-line-collapse-minor-modes
+            '(not company-mode global-company-mode))
+      (setq mode-line-collapse-minor-modes-to ""))
+  (setq mode-line-minor-modes nil))
+
 (setq display-time-format " %H:%M")
 (setq display-time-load-average nil)
 (setq display-time-default-load-average nil)
