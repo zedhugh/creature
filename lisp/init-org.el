@@ -27,6 +27,7 @@
 (defconst creature/org-src-enable-lang
   '((C          . t)
     (js         . t)
+    (dot        . t)
     (latex      . t)
     (shell      . t)
     (python     . t)
