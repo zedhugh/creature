@@ -1,8 +1,10 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 ;; buffer name
-(setq-default mode-line-buffer-identification
-              (propertized-buffer-identification "%b"))
+(defvar-local creature/mode-line-buffer-info
+  (propertized-buffer-identification "%b")
+  "custom version of `mode-line-buffer-identification'.")
+(put 'creature/mode-line-buffer-info 'risky-local-variable t)
 
 ;; marker region info
 (defvar creature/focus-window nil
@@ -47,22 +49,22 @@
      (column-number-indicator-zero-based
       (:propertize
        mode-line-position-column-line-format
-       display (min-width (10.0))
+       display (min-width (6.0))
        ,@mode-line-position--column-line-properties)
       (:propertize
        (:eval (string-replace
                "%c" "%C" (car mode-line-position-column-line-format)))
-       display (min-width (10.0))
+       display (min-width (6.0))
        ,@mode-line-position--column-line-properties))
      (:propertize
       mode-line-position-line-format
-      display (min-width (6.0))
+      display (min-width (3.0))
       ,@mode-line-position--column-line-properties))
     (column-number-mode
      (column-number-indicator-zero-based
       (:propertize
        mode-line-position-column-format
-       display (min-width (6.0))
+       display (min-width (3.0))
        ,@mode-line-position--column-line-properties)
       (:propertize
        (:eval (string-replace
@@ -82,7 +84,7 @@
         (:propertize
          ("" mode-line-percent-position)
          local-map ,mode-line-column-line-number-mode-map
-         display (min-width (5.0))
+         display (min-width (3.0))
          mouse-face mode-line-highlight
          ;; XXX needs better description
          help-echo "Window Scroll Percentage
@@ -109,10 +111,9 @@ mouse-1: Display Line and Column Mode Menu"))
          mode-line-front-space
          (:propertize
           ("" mode-line-mule-info mode-line-client mode-line-modified
-           mode-line-remote mode-line-window-dedicated)
-          display (min-width (6.0)))
+           mode-line-remote mode-line-window-dedicated))
          mode-line-frame-identification
-         mode-line-buffer-identification
+         creature/mode-line-buffer-info
          mode-line-position
          creature/mode-line-region-info
          " "
@@ -133,12 +134,16 @@ mouse-1: Display Line and Column Mode Menu"))
 (column-number-mode 1)
 
 ;; don't show minor modes exclude company-mode
-(if (not (boundp mode-line-collapse-minor-modes))
-    (progn
-      (setq mode-line-collapse-minor-modes
-            '(not company-mode global-company-mode))
-      (setq mode-line-collapse-minor-modes-to ""))
-  (setq mode-line-minor-modes nil))
+(defun creature/mode-line-change-modes ()
+  (if (boundp 'mode-line-collapse-minor-modes)
+      (progn
+        (setq mode-line-collapse-minor-modes
+              '(not company-mode global-company-mode))
+        (setq mode-line-collapse-minor-modes-to ""))
+    (if (boundp 'mode-line-minor-modes)
+        (setq mode-line-minor-modes nil)
+      (setq minor-mode-alist nil))))
+(add-hook 'emacs-startup-hook #'creature/mode-line-change-modes)
 
 (setq display-time-format " %H:%M")
 (setq display-time-load-average nil)
