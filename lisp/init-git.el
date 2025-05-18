@@ -53,6 +53,11 @@
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
+(with-eval-after-load 'transient
+  (unless (fboundp 'transient-define-group)
+    (let ((file (file-name-concat
+                 creature/pkg-dir "transient/lisp/transient.el")))
+      (when (file-exists-p file) (load file)))))
 
 (with-eval-after-load 'project
   (require 'magit))

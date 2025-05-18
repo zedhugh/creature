@@ -22,6 +22,8 @@
 (vertico-mode 1)
 (require 'vertico-indexed)
 (vertico-indexed-mode 1)
+(require 'vertico-sort)
+(setq vertico-sort-function 'vertico-sort-history-length-alpha)
 
 
 (require 'corfu)
