@@ -55,7 +55,9 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
   "Root directory of Creature.")
 
 (defconst creature/cache-dir
-  (expand-file-name ".cache" creature/config-dir)
+  (let ((dir (expand-file-name ".cache" creature/config-dir)))
+    (unless (file-exists-p dir) (mkdir dir))
+    dir)
   "Cache directory of Creature.")
 
 (add-to-list 'load-path (expand-file-name "lisp" creature/config-dir) t)
