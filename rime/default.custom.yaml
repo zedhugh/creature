@@ -10,3 +10,10 @@ patch:
     - schema: terra_pinyin
   menu:
     page_size: 10
+  switcher:
+    caption: 〔方案選單〕
+    hotkeys:
+      - Control+grave
+      - Control+at
+      - Alt+space
+      - Alt+grave

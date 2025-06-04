@@ -11,11 +11,16 @@
 
 (setq default-input-method "rime")
 (setq rime-show-candidate 'posframe)
-(setq rime-posframe-style 'simple)
+(setq rime-posframe-style 'vertical)
 (setq rime-posframe-fixed-position t)
+(setq rime-sidewindow-style 'vertical)
 
 (lazy-load-set-keys
- '(("M-i" . rime-select-schema))
+ '(("M-i" . rime-select-schema)
+   ("C-`" . rime-send-keybinding)
+   ("M-`" . rime-send-keybinding)
+   ("C-@" . rime-send-keybinding)
+   ("M-SPC" . rime-send-keybinding))
  rime-mode-map)
 
 (lazy-load-set-keys
@@ -24,6 +29,5 @@
    ("M-h" . rime--escape)
    ("C-S-<return>" . rime-send-keybinding))
  rime-active-mode-map)
-
 
 (provide 'init-rime)
