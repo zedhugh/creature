@@ -184,9 +184,9 @@
 [submodule "site-lisp/emacs-corfu-doc-terminal"]
 	path = site-lisp/emacs-corfu-doc-terminal
 	url = https://codeberg.org/akib/emacs-corfu-doc-terminal.git
-[submodule "site-lisp/emacs-flymake-eslint"]
-	path = site-lisp/emacs-flymake-eslint
-	url = https://github.com/zedhugh/emacs-flymake-eslint.git
+[submodule "site-lisp/eslint"]
+	path = site-lisp/eslint
+	url = https://github.com/zedhugh/eslint.el.git
 [submodule "site-lisp/plantuml-mode"]
 	path = site-lisp/plantuml-mode
 	url = https://github.com/skuro/plantuml-mode.git

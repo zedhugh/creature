@@ -2,7 +2,7 @@
 
 (require 'init-package)
 (add-pkg-in-pkg-dir "eslint-disable-rule")
-(add-pkg-in-pkg-dir "emacs-flymake-eslint")
+(add-pkg-in-pkg-dir "eslint")
 
 (defun creature/flymake-show-diagnostics-buffer-and-jump ()
   (interactive)
@@ -49,22 +49,22 @@
 (autoload 'eslint-disable-rule-flymake "eslint-disable-rule-flymake")
 (autoload 'eslint-disable-rule-flycheck "eslint-disable-rule-flycheck")
 
-(autoload 'emacs-flymake-eslint-enable "emacs-flymake-eslint" "" t)
-(autoload 'emacs-flymake-eslint--checker "emacs-flymake-eslint" "" t)
+(autoload 'eslint-flymake-enable "eslint-flymake" "" t)
+(autoload 'eslint-flymake-backend "eslint-flymake" "" t)
 
-(defun eslint-disable-rule--emacs-flymake-eslint-active-p ()
+(defun eslint-disable-rule--eslint-flymake-active-p ()
   "Return non nil if `flymake-eslint' is enabled in the current buffer."
   (and
    (featurep 'flymake)
    (or (featurep 'flymake-eslint)
-       (featurep 'emacs-flymake-eslint))
+       (featurep 'eslint-flymake))
    flymake-mode
    (member eslint-disable-rule-flymake--checker-fn flymake-diagnostic-functions)))
 
 (with-eval-after-load 'eslint-disable-rule-flymake
-  (setq eslint-disable-rule-flymake--checker-fn #'emacs-flymake-eslint--checker)
+  (setq eslint-disable-rule-flymake--checker-fn #'eslint-flymake-backend)
   (advice-add 'eslint-disable-rule-flymake--eslint-active-p
-              :override #'eslint-disable-rule--emacs-flymake-eslint-active-p))
+              :override #'eslint-disable-rule--eslint-flymake-active-p))
 
 (defun creature/flymake-add-eslint-backend ()
   (when (and flymake-mode
@@ -73,7 +73,7 @@
                              'typescript-mode
                              'typescript-ts-base-mode
                              'web-mode))
-    (emacs-flymake-eslint-enable)))
+    (eslint-flymake-enable)))
 
 
 (provide 'init-flymake)
