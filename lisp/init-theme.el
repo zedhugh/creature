@@ -1,9 +1,5 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(require 'init-package)
-(add-pkg-in-pkg-dir "rainbow-delimiters")
-(add-pkg-in-pkg-dir "rainbow-identifiers")
-
 ;; Pulse
 (defvar creature/pulse-enable t
   "Whether enable pulse for scroll and switch window.")
@@ -31,12 +27,6 @@
 (add-hook 'erc-mode-hook #'goto-address-mode)
 (add-hook 'text-mode-hook #'goto-address-mode)
 (add-hook 'prog-mode-hook #'goto-address-prog-mode)
-
-
-(autoload 'rainbow-delimiters-mode "rainbow-delimiters")
-(autoload 'rainbow-identifiers-mode "rainbow-identifiers")
-(dolist (mode '(rainbow-delimiters-mode rainbow-identifiers-mode))
-  (add-hook 'prog-mode-hook mode))
 
 
 (global-whitespace-mode 1)
