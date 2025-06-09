@@ -7,12 +7,6 @@
 ;; Initialize frame with alpha
 (add-to-list 'default-frame-alist '(alpha-background . 85))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
-(add-to-list 'default-frame-alist
-             (cons 'font (if (eq system-type 'windows-nt)
-                             (if (> (frame-pixel-width) 2560)
-                                 "等距更纱黑体 SC-16"
-                               "等距更纱黑体 SC-12")
-                           "Sarasa Mono SC-12")))
 
 (when (fboundp 'menu-bar-mode)
   (menu-bar-mode -1))
