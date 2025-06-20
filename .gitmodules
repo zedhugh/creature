@@ -214,3 +214,6 @@
 [submodule "site-lisp/llama"]
 	path = site-lisp/llama
 	url = https://github.com/tarsius/llama.git
+[submodule "site-lisp/meson-mode"]
+	path = site-lisp/meson-mode
+	url = https://github.com/wentasah/meson-mode.git

@@ -9,6 +9,9 @@
 (add-pkg-in-pkg-dir "tablist")
 (add-pkg-in-pkg-dir "saveplace-pdf-view")
 (add-pkg-in-pkg-dir "graphviz-dot-mode")
+(add-pkg-in-pkg-dir "meson-mode")
+
+
 (autoload 'vimrc-mode "vimrc-mode" "" t)
 (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
 
@@ -77,6 +80,13 @@
 (autoload 'graphviz-dot-mode "graphviz-dot-mode" "" t)
 (add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
 (add-to-list 'auto-mode-alist '("\\.gv\\'" . graphviz-dot-mode))
+
+
+(autoload 'meson-mode "meson-mode" "" t)
+(add-to-list
+ 'auto-mode-alist
+ '("/meson\\(\\.build\\|_options\\.txt\\|\\.options\\)\\'" . meson-mode))
+
 
 ;; optimize performance of long-line files
 (setq-default bidi-display-reordering t)
