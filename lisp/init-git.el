@@ -6,6 +6,7 @@
 (add-pkg-in-pkg-dir "git-modes")
 (add-pkg-in-pkg-dir "with-editor")
 (add-pkg-in-pkg-dir "llama")
+(add-pkg-in-pkg-dir "cond-let")
 
 (require 'lazy-load)
 
@@ -34,6 +35,10 @@
 (add-hook 'kill-emacs-hook #'kill-gpg-agent-when-emacs-exit)
 
 (setq epg-pinentry-mode 'loopback)
+
+;; fix https://github.com/magit/magit/issues/5462
+(with-eval-after-load 'magit-process
+  (setq magit-auto-revert-mode nil))
 
 (require 'git-modes)
 (with-eval-after-load 'magit
