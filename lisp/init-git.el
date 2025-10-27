@@ -36,10 +36,6 @@
 
 (setq epg-pinentry-mode 'loopback)
 
-;; fix https://github.com/magit/magit/issues/5462
-(with-eval-after-load 'magit-process
-  (setq magit-auto-revert-mode nil))
-
 (require 'git-modes)
 (with-eval-after-load 'magit
   ;; (require 'forge)
