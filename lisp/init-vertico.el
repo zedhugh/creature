@@ -29,9 +29,13 @@
 (require 'corfu)
 (global-corfu-mode 'toggle)
 (setq corfu-auto t
+      corfu-cycle t
       corfu-auto-delay 0.05
       corfu-auto-prefix 2
       corfu-quit-no-match t)
+
+(autoload 'corfu-info-documentation "corfu-info" "" t)
+(autoload 'corfu-info-location "corfu-info" "" t)
 
 (require 'orderless)
 (setq completion-styles '(orderless basic partial-completion flex)
@@ -59,11 +63,15 @@
 
 
 (defun creature/load-corfu-terminal-in-no-gui-env ()
-  (unless (display-graphic-p)
-    (require 'corfu-terminal)
-    (require 'corfu-doc-terminal)
-    (corfu-terminal-mode 1)
-    (corfu-doc-terminal-mode 1)))
+  (if (or (display-graphic-p) (featurep 'tty-child-frames))
+      (progn
+        (require 'corfu-popupinfo)
+        (corfu-popupinfo-mode 1))
+    (progn
+      (require 'corfu-terminal)
+      (require 'corfu-doc-terminal)
+      (corfu-terminal-mode 1)
+      (corfu-doc-terminal-mode 1))))
 
 (add-hook 'emacs-startup-hook #'creature/load-corfu-terminal-in-no-gui-env)
 (add-hook 'server-after-make-frame-hook #'creature/load-corfu-terminal-in-no-gui-env)
