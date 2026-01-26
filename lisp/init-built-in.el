@@ -120,5 +120,9 @@
 (unless (featurep 'server) (require 'server))
 (unless (server-running-p) (server-start))
 
+;; disable color of `compilation-mode'
+(with-eval-after-load 'compile
+  (add-to-list 'compilation-environment "NO_COLOR=1"))
+
 
 (provide 'init-built-in)
