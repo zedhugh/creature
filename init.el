@@ -109,7 +109,3 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 
 (with-eval-after-load 'package
   (add-to-list 'package-archives '("melpa"  . "https://melpa.org/packages/")))
-
-
-(setq warning-minimum-level :error)
-(setq warning-minimum-log-level :error)

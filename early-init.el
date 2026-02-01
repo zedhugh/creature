@@ -36,3 +36,7 @@
     (set-buffer-modified-p nil)))
 
 (add-hook 'emacs-startup-hook #'creature/welcom-message 1999)
+
+
+(setq warning-minimum-level :error)
+(setq warning-minimum-log-level :error)
