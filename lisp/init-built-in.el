@@ -111,7 +111,9 @@
   (setq dired-recursive-deletes 'always)
 
   ;; don't make too many dired buffer
-  (put 'dired-find-alternate-file 'disabled nil))
+  (put 'dired-find-alternate-file 'disabled nil)
+
+  (define-key dired-mode-map (kbd "b") #'creature/mpv))
 
 (add-hook 'display-fill-column-indicator-mode-hook
           (lambda ()

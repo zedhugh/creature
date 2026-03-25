@@ -45,6 +45,39 @@
            (t (concat "/sudo:root@localhost:" fname))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                    mpv                                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun creature/is-bd-dir (dir)
+  (let ((index-file (file-name-concat dir "BDMV" "index.bdmv"))
+        (stream-dir (file-name-concat dir "BDMV" "STREAM"))
+        (playlist-dir (file-name-concat dir "BDMV" "PLAYLIST")))
+    (and (file-exists-p index-file)
+         (not (directory-empty-p stream-dir))
+         (not (directory-empty-p playlist-dir)))))
+
+(defun creature/is-iso-file (filename)
+  (and (string-equal (downcase (or (file-name-extension filename) "")) "iso")
+       (file-exists-p filename)))
+
+(defun creature/open-by-mpv (filename)
+  (cond
+   ((creature/is-bd-dir filename)
+    (call-process "mpv" nil 0 nil filename))
+   ((creature/is-iso-file filename)
+    (call-process "mpv" nil 0 nil
+                  "bd://"
+                  (concat "--bluray-device=" filename)))
+   (t
+    (call-process "mpv" nil 0 nil filename))))
+
+(defun creature/mpv ()
+  (interactive)
+  (let ((filename (if (derived-mode-p 'dired-mode)
+                      (dired-get-file-for-visit)
+                    (buffer-file-name))))
+    (when filename (creature/open-by-mpv filename))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               indentation                                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar creature/indent-sensitive-modes

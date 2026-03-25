@@ -81,6 +81,7 @@
    ("be" . eval-buffer)
 
    ("fi" . creature/open-init-file)
+   ("fm" . creature/mpv)
    ("fo" . creature/open-file-or-directory-in-external-app)
    ("fj" . dired-jump)
    ("ff" . find-file)
