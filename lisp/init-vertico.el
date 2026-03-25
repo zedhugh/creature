@@ -20,8 +20,6 @@
 
 (require 'vertico)
 (vertico-mode 1)
-(require 'vertico-indexed)
-(vertico-indexed-mode 1)
 (require 'vertico-sort)
 (setq vertico-sort-function 'vertico-sort-history-length-alpha)
 
@@ -44,10 +42,47 @@
 (require 'corfu-doc)
 (add-hook 'corfu-mode-hook #'corfu-doc-mode)
 
-(lazy-load-local-keys
- '(("M-SPC" . corfu-quick-complete))
- corfu-map
- "corfu-quick")
+
+;;; indexed extension
+(let ((start 0)
+      (count 10))
+  (require 'vertico-indexed)
+  (require 'corfu-indexed)
+  (vertico-indexed-mode 1)
+  (corfu-indexed-mode 1)
+  (setq vertico-count count
+        vertico-indexed-start start
+        corfu-count count
+        corfu-indexed-start start)
+  (dotimes (i count)
+    (let ((press-key (format "M-%d" i))
+          (target-key (format "C-u %d RET" i)))
+      (define-key vertico-map (kbd press-key) (kbd target-key))
+      (define-key corfu-map (kbd press-key) (kbd target-key)))))
+
+
+;;; quick extension
+(let ((quick1 "wesdf")
+      (quick2 "iojkl")
+      (trigger "M-SPC"))
+  (with-eval-after-load 'vertico-quick
+    (setq vertico-quick1 quick1)
+    (setq vertico-quick2 quick2))
+
+  (with-eval-after-load 'corfu-quick
+    (setq corfu-quick1 quick1)
+    (setq corfu-quick2 quick2))
+
+  (lazy-load-local-keys
+   `((,trigger . vertico-quick-insert))
+   vertico-map
+   "vertico-quick")
+
+  (lazy-load-local-keys
+   `((,trigger . corfu-quick-complete))
+   corfu-map
+   "corfu-quick"))
+
 
 (lazy-load-global-keys
  '(("C-'" . cape-file))
