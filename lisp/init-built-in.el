@@ -27,6 +27,9 @@
 ;; Highlight trail whitespace
 (setq show-trailing-whitespace t)
 
+;; reset `split-width-threshold' to old value
+(setq split-width-threshold 160)
+
 ;; Save minibuffer history
 (savehist-mode)
 (setq history-length                1000
