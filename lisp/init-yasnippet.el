@@ -18,6 +18,10 @@
 
 (add-hook 'prog-mode-hook #'yas-minor-mode)
 
+(lazy-load-local-keys
+ '(("C-M-i" . yas-insert-snippet))
+ yas-minor-mode-map "yasnippet")
+
 
 (lazy-load-global-keys
  '(("w"   . aya-create)
