@@ -75,6 +75,16 @@
 (setq backward-delete-char-untabify-method 'hungry)
 
 
+;;; completion-in-region-mode
+(lazy-load-unset-keys
+ '([M-up] [M-down])
+ completion-in-region-mode-map)
+(lazy-load-set-keys
+ '(("M-n" . minibuffer-next-completion)
+   ("M-p" . minibuffer-previous-completion))
+ completion-in-region-mode-map)
+
+
 (lazy-load-set-keys
  '(("bb" . switch-to-buffer)
    ("bd" . kill-current-buffer)
