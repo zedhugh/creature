@@ -23,6 +23,31 @@
  yas-minor-mode-map "yasnippet")
 
 
+(defvar creature/company-with-yasnippet t
+  "Make every `company-backend' with `company-yasnippet'.")
+
+(defun creature/add-snippet (backend)
+  "Add `company-yasnippet' to echo backend in `company-backends'."
+  (if (and (listp backend) (member 'company-yasnippet backend))
+      backend
+    (append (if (consp backend) backend (list backend))
+            '(:with company-yasnippet))))
+
+(defun creature/handle-company-backends ()
+  "Handle `company-yasnippet' in `company-backends'."
+  (set (make-local-variable 'company-backends)
+       (mapcar #'creature/add-snippet company-backends)))
+
+(defun creature/yasnippet-setup ()
+  "Setup yasnippet."
+  (when (and (bound-and-true-p company-mode) creature/company-with-yasnippet)
+    (with-current-buffer (buffer-name)
+      (run-with-timer 0.5 nil #'creature/handle-company-backends))))
+
+(with-eval-after-load 'yasnippet
+  ;; (setq yas-indent-line 'auto)       ;don't indent for snippet
+  (add-hook 'yas-minor-mode-hook #'creature/yasnippet-setup))
+
 (lazy-load-global-keys
  '(("w"   . aya-create)
    ("TAB" . aya-expand)
