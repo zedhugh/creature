@@ -49,7 +49,7 @@
   (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
   (add-to-list 'eglot-server-programs
                `((cmake-mode cmake-ts-mode)
-                 . ,(eglot-alternatives '(("neocmakelsp" "--stdio") "cmake-language-server"))))
+                 . ,(eglot-alternatives '(("neocmakelsp" "stdio") "cmake-language-server"))))
 
   (add-hook 'eglot-managed-mode-hook #'creature/eglot-load-markdown-for-doc)
   (add-hook 'eglot-managed-mode-hook #'creature/disable-eglot-for-json)
