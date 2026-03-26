@@ -47,59 +47,153 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                                    mpv                                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun creature/is-bd-dir (dir)
-  (let ((index-file (file-name-concat dir "BDMV" "index.bdmv"))
-        (stream-dir (file-name-concat dir "BDMV" "STREAM"))
-        (playlist-dir (file-name-concat dir "BDMV" "PLAYLIST")))
-    (and (file-exists-p index-file)
-         (not (directory-empty-p stream-dir))
-         (not (directory-empty-p playlist-dir)))))
+(defun creature/file-mime-type (file &optional deref-symlinks)
+  "Return FILE's MIME type as reported by the external `file' program.
+When DEREF-SYMLINKS is non-nil and FILE is a symbolic link, inspect the
+link target instead of the link itself.
 
-(defun creature/is-iso-file (filename)
-  (and (string-equal (downcase (or (file-name-extension filename) "")) "iso")
-       (file-exists-p filename)))
-
-(defun creature/get-file-mime-type (file &optional deref-symlinks)
-  "Get the mime type of FILE, according to the `file' command.
-If you give a prefix argument \\[universal-argument] to this command, and
-FILE is a symbolic link, then the command will print the type
-of the target of the link instead."
-  (interactive (list (dired-get-filename t t) current-prefix-arg))
-  (let (process-file-side-effects)
+Signal a `user-error' if FILE does not exist, is unreadable, or its MIME
+type cannot be determined."
+  (unless (executable-find "file")
+    (user-error "MIME detection requires the `file' program"))
+  (unless (file-exists-p file)
+    (user-error "File does not exist: %s" file))
+  (unless (file-readable-p file)
+    (user-error "File is not readable: %s" file))
+  (let ((args (append (when deref-symlinks
+                        '("-L"))
+                      '("--brief" "--mime-type" "--")
+                      (list file)))
+        (process-file-side-effects nil))
     (with-temp-buffer
-      (if deref-symlinks
-          (process-file "file" nil t t "-L" "--brief" "--mime-type" "--" file)
-        (process-file "file" nil t t "--brief" "--mime-type" "--" file))
-      (when (bolp)
-        (delete-char -1))
-      (buffer-string))))
+      (let* ((status (apply #'process-file "file" nil t nil args))
+             (mime-type (replace-regexp-in-string "\n\\'" "" (buffer-string))))
+        (unless (eq status 0)
+          (user-error "Failed to detect MIME type for %s: %s"
+                      file
+                      (if (string-empty-p mime-type)
+                          (format "`file' exited with status %s" status)
+                        mime-type)))
+        (when (string-empty-p mime-type)
+          (user-error "Empty MIME type for %s" file))
+        mime-type))))
 
-(defun creature/open-by-mpv (filename)
+(defun creature/7z-executable ()
+  "Return the available 7-Zip executable path, or nil if not found."
+  (or (executable-find "7z")
+      (executable-find "7zz")))
+
+(defun creature/image-mime-type-p (mime-type)
+  "Return t when MIME-TYPE names an optical disc image format.
+This accepts the MIME types returned by `file' for ISO 9660 and UDF
+images, plus the corresponding shared-mime-info aliases."
+  (not (null (member mime-type '("application/x-udf-image"
+                                 "application/x-iso9660-image"
+                                 "application/vnd.efi.iso"
+                                 "application/x-cd-image")))))
+
+(defun creature/image-files (image)
+  "Return a list of file paths stored in IMAGE using `7z l -slt'.
+Directory entries are excluded from the returned list."
+  (let ((7z-exe (creature/7z-executable)))
+    (unless 7z-exe
+      (user-error "Listing image contents requires `7z' or `7zz'"))
+    (unless (file-exists-p image)
+      (user-error "Image does not exist: %s" image))
+    (unless (file-readable-p image)
+      (user-error "Image is not readable: %s" image))
+    (let ((process-file-side-effects nil))
+      (with-temp-buffer
+        (let ((status (process-file 7z-exe nil t nil "l" "-slt" "--" image))
+              (current-path nil)
+              files)
+          (unless (eq status 0)
+            (user-error "Failed to list image contents for %s" image))
+          (goto-char (point-min))
+          (while (not (eobp))
+            (cond
+             ((looking-at "^Path = \\(.*\\)$")
+              (setq current-path (match-string 1)))
+             ((looking-at "^Folder = -$")
+              (when current-path
+                (push current-path files))))
+            (forward-line 1))
+          (nreverse files))))))
+
+(defun creature/bluray-iso-p (image)
+  "Return non-nil when IMAGE looks like a Blu-ray ISO."
+  (let (has-index has-movie-object has-playlist has-stream)
+    (dolist (path (creature/image-files image))
+      (cond
+       ((string= path "BDMV/index.bdmv")
+        (setq has-index t))
+       ((string= path "BDMV/MovieObject.bdmv")
+        (setq has-movie-object t))
+       ((and (string-prefix-p "BDMV/PLAYLIST/" path)
+             (string-suffix-p ".mpls" path))
+        (setq has-playlist t))
+       ((and (string-prefix-p "BDMV/STREAM/" path)
+             (string-suffix-p ".m2ts" path))
+        (setq has-stream t))))
+    (and has-index has-movie-object has-playlist has-stream)))
+
+(defun creature/bluray-directory-p (dir)
+  "Return non-nil when DIR looks like a Blu-ray directory tree."
+  (let* ((bdmv-dir (file-name-concat dir "BDMV"))
+         (index-file (file-name-concat bdmv-dir "index.bdmv"))
+         (movie-object-file (file-name-concat bdmv-dir "MovieObject.bdmv"))
+         (playlist-dir (file-name-concat bdmv-dir "PLAYLIST"))
+         (stream-dir (file-name-concat bdmv-dir "STREAM"))
+         (playlist-files (and (file-directory-p playlist-dir)
+                              (directory-files playlist-dir t nil t)))
+         (stream-files (and (file-directory-p stream-dir)
+                            (directory-files stream-dir t nil t))))
+    (and (file-regular-p index-file)
+         (file-regular-p movie-object-file)
+         (seq-some (lambda (path)
+                     (and (file-regular-p path)
+                          (string-suffix-p ".mpls" path t)))
+                   playlist-files)
+         (seq-some (lambda (path)
+                     (and (file-regular-p path)
+                          (string-suffix-p ".m2ts" path t)))
+                   stream-files))))
+
+(defun creature/play-with-mpv (filename)
+  "Play local media FILENAME with mpv, including Blu-ray directories and images."
   (cond
-   ((creature/is-bd-dir filename)
+   ((not (executable-find "mpv"))
+    (user-error "mpv: executable not found"))
+   ((tramp-tramp-file-p filename)
+    (user-error "mpv: cannot play remote file: %s" filename))
+   ((creature/bluray-directory-p filename)
     (call-process "mpv" nil 0 nil filename))
-   ((creature/is-iso-file filename)
-    (call-process "mpv" nil 0 nil
-                  "bd://"
-                  (concat "--bluray-device=" filename)))
    (t
-    (call-process "mpv" nil 0 nil filename))))
+    (let ((mime-type (creature/file-mime-type filename t)))
+      (cond
+       ((string-prefix-p "video/" mime-type t)
+        (call-process "mpv" nil 0 nil filename))
+       ((string-prefix-p "audio/" mime-type t)
+        (call-process "mpv" nil 0 nil "--no-video" filename))
+       ((creature/image-mime-type-p mime-type)
+        (if (or (not (creature/7z-executable))
+                (creature/bluray-iso-p filename))
+            (call-process "mpv" nil 0 nil
+                          "bd://"
+                          (concat "--bluray-device=" filename))
+          (user-error "mpv: unsupported image %s, MIME: %s"
+                      filename mime-type)))
+       (t
+        (user-error "mpv: unsupported file %s, MIME: %s" filename mime-type)))))))
 
 (defun creature/mpv ()
   (interactive)
   (let ((filename (if (derived-mode-p 'dired-mode)
                       (dired-get-file-for-visit)
                     (buffer-file-name))))
-    (if (not filename)
-        (user-error "mpv: no file to play")
-      (if (tramp-tramp-file-p filename)
-          (user-error "mpv: cannot play remote file: %s" filename)
-        (let ((mime-type (creature/get-file-mime-type filename t)))
-          (if (not (and (stringp mime-type)
-                        (or (string-prefix-p "audio/" mime-type t)
-                            (string-prefix-p "video/" mime-type t))))
-              (user-error "mpv: cannot play '%s' file: %s" mime-type filename)
-            (creature/open-by-mpv filename)))))))
+    (if filename
+        (creature/play-with-mpv filename)
+      (user-error "mpv: no file to play"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               indentation                                 ;;
