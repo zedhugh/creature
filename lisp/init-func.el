@@ -59,6 +59,21 @@
   (and (string-equal (downcase (or (file-name-extension filename) "")) "iso")
        (file-exists-p filename)))
 
+(defun creature/get-file-mime-type (file &optional deref-symlinks)
+  "Get the mime type of FILE, according to the `file' command.
+If you give a prefix argument \\[universal-argument] to this command, and
+FILE is a symbolic link, then the command will print the type
+of the target of the link instead."
+  (interactive (list (dired-get-filename t t) current-prefix-arg))
+  (let (process-file-side-effects)
+    (with-temp-buffer
+      (if deref-symlinks
+          (process-file "file" nil t t "-L" "--brief" "--mime-type" "--" file)
+        (process-file "file" nil t t "--brief" "--mime-type" "--" file))
+      (when (bolp)
+        (delete-char -1))
+      (buffer-string))))
+
 (defun creature/open-by-mpv (filename)
   (cond
    ((creature/is-bd-dir filename)
@@ -75,7 +90,16 @@
   (let ((filename (if (derived-mode-p 'dired-mode)
                       (dired-get-file-for-visit)
                     (buffer-file-name))))
-    (when filename (creature/open-by-mpv filename))))
+    (if (not filename)
+        (user-error "mpv: no file to play")
+      (if (tramp-tramp-file-p filename)
+          (user-error "mpv: cannot play remote file: %s" filename)
+        (let ((mime-type (creature/get-file-mime-type filename t)))
+          (if (not (and (stringp mime-type)
+                        (or (string-prefix-p "audio/" mime-type t)
+                            (string-prefix-p "video/" mime-type t))))
+              (user-error "mpv: cannot play '%s' file: %s" mime-type filename)
+            (creature/open-by-mpv filename)))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                               indentation                                 ;;
