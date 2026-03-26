@@ -111,4 +111,12 @@
 (add-hook 'emacs-startup-hook #'creature/load-corfu-terminal-in-no-gui-env)
 (add-hook 'server-after-make-frame-hook #'creature/load-corfu-terminal-in-no-gui-env)
 
+
+(lazy-load-global-keys
+ '(("C-." . embark-act)
+   ("C-;" . embark-dwim)
+   ("C-h B" . embark-bindings))
+ "embark")
+
+
 (provide 'init-vertico)
