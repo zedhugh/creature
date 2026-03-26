@@ -130,4 +130,15 @@
   (add-to-list 'compilation-environment "NO_COLOR=1"))
 
 
+;;; fix `goto-line-relative'
+(defun fix/goto-line-relative (line &optional buffer interactive)
+  "Go to LINE, counting from line at (point-min).
+The line number is relative to the accessible portion of the narrowed
+buffer.  The arguments BUFFER and INTERACTIVE are the same as in the
+function `goto-line'."
+  (interactive (append (goto-line-read-args t) '(t)))
+  (goto-line line buffer t interactive))
+(advice-add 'goto-line-relative :override #'fix/goto-line-relative)
+
+
 (provide 'init-built-in)
