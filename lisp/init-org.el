@@ -14,11 +14,13 @@
       '(("js"   . js)
         ("ts"   . typescript-ts)
         ("tsx"  . tsx-ts)
+        ("dot"  . graphviz-dot)
         ("html" . mhtml)
         ("json" . js-json))
     '(("js"   . js)
       ("ts"   . typescript)
       ("tsx"  . typescript-tsx)
+      ("dot"  . graphviz-dot)
       ("html" . mhtml)
       ("json" . js-json)))
   "Better src lang reflex to mode.")
@@ -91,10 +93,6 @@
 
 (with-eval-after-load 'ob-plantuml
   (setq org-plantuml-exec-mode 'plantuml))
-
-(with-eval-after-load 'org-src
-  (defvar org-src-lang-modes)
-  (add-to-list 'org-src-lang-modes  '("dot" . graphviz-dot)))
 
 
 (provide 'init-org)
