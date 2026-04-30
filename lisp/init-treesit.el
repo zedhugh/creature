@@ -13,6 +13,9 @@
     (add-to-list 'major-mode-remap-alist '(js-mode . js-ts-mode))
     (add-to-list 'major-mode-remap-alist '(javascript-mode . js-ts-mode)))
 
+  (when (treesit-ready-p 'lua)
+    (add-to-list 'major-mode-remap-alist '(lua-mode . lua-ts-mode)))
+
   (when (treesit-ready-p 'json)
     (add-to-list 'major-mode-remap-alist '(js-json-mode . json-ts-mode)))
 

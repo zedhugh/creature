@@ -48,6 +48,9 @@
   (setq eglot-autoshutdown t)
   (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
   (add-to-list 'eglot-server-programs
+               `((lua-mode lua-ts-mode)
+                 . ,(eglot-alternatives '("emmylua_ls" "lua-language-server" "lua-lsp"))))
+  (add-to-list 'eglot-server-programs
                `((cmake-mode cmake-ts-mode)
                  . ,(eglot-alternatives '(("neocmakelsp" "stdio") "cmake-language-server"))))
 
@@ -78,6 +81,8 @@
                 python-ts-mode-hook
                 cmake-mode-hook
                 cmake-ts-mode-hook
+                lua-mode-hook
+                lua-ts-mode-hook
                 c-mode-hook
                 c++-mode-hook
                 c-ts-base-mode-hook))
