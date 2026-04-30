@@ -159,6 +159,7 @@ Directory entries are excluded from the returned list."
 
 (defun creature/play-with-mpv (filename)
   "Play local media FILENAME with mpv, including Blu-ray directories and images."
+  (require 'tramp)
   (cond
    ((not (executable-find "mpv"))
     (user-error "mpv: executable not found"))
