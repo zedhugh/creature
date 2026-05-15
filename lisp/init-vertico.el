@@ -44,7 +44,7 @@
 
 
 ;;; indexed extension
-(let ((start 0)
+(let ((start 1)
       (count 10))
   (require 'vertico-indexed)
   (require 'corfu-indexed)
@@ -55,8 +55,10 @@
         corfu-count count
         corfu-indexed-start start)
   (dotimes (i count)
-    (let ((press-key (format "M-%d" i))
-          (target-key (format "C-u %d RET" i)))
+    (let* ((n (+ i start))
+           (k (mod n count))
+           (press-key (format "M-%d" k))
+           (target-key (format "C-u %d RET" n)))
       (define-key vertico-map (kbd press-key) (kbd target-key))
       (define-key corfu-map (kbd press-key) (kbd target-key)))))
 
