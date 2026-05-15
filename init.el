@@ -64,7 +64,7 @@ If freezing sometimes, decrease it. If stuttering, increase it.")
 (let ((disable-warning-file (file-name-concat creature/cache-dir "disabled-warning.el")))
   (when (file-exists-p disable-warning-file) (load disable-warning-file)))
 
-(add-to-list 'load-path (expand-file-name "lisp" creature/config-dir) t)
+(add-to-list 'load-path (expand-file-name "lisp" creature/config-dir))
 
 
 (require 'init-modeline)

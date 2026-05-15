@@ -36,22 +36,28 @@ Do this recursively for subdirectories of DIR."
     (when (cl-some (lambda (file)
                      (member (file-name-extension file) load-extension))
                    files)
-      (add-to-list 'load-path dir t))
+      (add-to-list 'load-path dir))
     (mapc #'add-dir-and-subdirs-to-load-path subdirs)))
 
 (defun add-pkg-in-pkg-dir (pkg)
   "Add PKG located in `creature/pkg-dir' to `load-path'."
   (add-dir-and-subdirs-to-load-path (expand-file-name pkg creature/pkg-dir)))
 
-(add-to-list 'load-path creature/pkg-dir t)
+(add-to-list 'load-path creature/pkg-dir)
 
 ;; add basic packages
 (add-pkg-in-pkg-dir "lazy-load")
 
-;; builtin maybe exist
-;; "compat" "transient"
-(dolist (pkg '("compat" "transient"))
-  (unless (locate-library pkg)
-    (add-pkg-in-pkg-dir pkg)))
+;; "transient" and "compat" always use submodule package
+;; and "cond-let" is dependency of "transient"
+(dolist (pkg '("transient" "cond-let" "compat"))
+  (add-pkg-in-pkg-dir pkg))
+
+(dolist (pkg '("transient" "compat"))
+  (let ((file (locate-library pkg))
+        (feature (intern-soft pkg)))
+    (when (and (featurep feature) (string-prefix-p "/usr/share/emacs" file))
+      (unload-feature feature t)
+      (require feature))))
 
 (provide 'init-package)
