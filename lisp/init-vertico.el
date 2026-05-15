@@ -5,12 +5,10 @@
 (add-pkg-in-pkg-dir "vertico")
 (add-pkg-in-pkg-dir "corfu")
 (add-pkg-in-pkg-dir "orderless")
-(add-pkg-in-pkg-dir "corfu-doc")
 (add-pkg-in-pkg-dir "cape")
 (add-pkg-in-pkg-dir "consult")
 (add-pkg-in-pkg-dir "emacs-corfu-terminal")
 (add-pkg-in-pkg-dir "emacs-popon")
-(add-pkg-in-pkg-dir "emacs-corfu-doc-terminal")
 (add-pkg-in-pkg-dir "embark")
 
 
@@ -38,9 +36,6 @@
 (require 'orderless)
 (setq completion-styles '(orderless basic partial-completion flex)
       completion-category-overrides '((file (styles basic partial-completion))))
-
-(require 'corfu-doc)
-(add-hook 'corfu-mode-hook #'corfu-doc-mode)
 
 
 ;;; indexed extension
@@ -98,17 +93,13 @@
 (with-eval-after-load 'consult
   (recentf-mode 1))
 
+(require 'corfu-popupinfo)
+(corfu-popupinfo-mode 1)
 
 (defun creature/load-corfu-terminal-in-no-gui-env ()
-  (if (or (display-graphic-p) (featurep 'tty-child-frames))
-      (progn
-        (require 'corfu-popupinfo)
-        (corfu-popupinfo-mode 1))
-    (progn
-      (require 'corfu-terminal)
-      (require 'corfu-doc-terminal)
-      (corfu-terminal-mode 1)
-      (corfu-doc-terminal-mode 1))))
+  (unless (or (display-graphic-p) (featurep 'tty-child-frames))
+    (require 'corfu-terminal)
+    (corfu-terminal-mode 1)))
 
 (add-hook 'emacs-startup-hook #'creature/load-corfu-terminal-in-no-gui-env)
 (add-hook 'server-after-make-frame-hook #'creature/load-corfu-terminal-in-no-gui-env)

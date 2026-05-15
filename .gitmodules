@@ -49,9 +49,6 @@
 [submodule "site-lisp/embark"]
 	path = site-lisp/embark
 	url = https://github.com/oantolin/embark.git
-[submodule "site-lisp/corfu-doc"]
-	path = site-lisp/corfu-doc
-	url = https://github.com/galeo/corfu-doc.git
 [submodule "site-lisp/awesome-pair"]
 	path = site-lisp/awesome-pair
 	url = https://github.com/manateelazycat/awesome-pair.git
@@ -172,9 +169,6 @@
 [submodule "site-lisp/emacs-popon"]
 	path = site-lisp/emacs-popon
 	url = https://codeberg.org/akib/emacs-popon.git
-[submodule "site-lisp/emacs-corfu-doc-terminal"]
-	path = site-lisp/emacs-corfu-doc-terminal
-	url = https://codeberg.org/akib/emacs-corfu-doc-terminal.git
 [submodule "site-lisp/eslint"]
 	path = site-lisp/eslint
 	url = https://github.com/zedhugh/eslint.el.git
