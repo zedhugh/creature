@@ -15,6 +15,12 @@
 (setq rime-posframe-fixed-position t)
 (setq rime-sidewindow-style 'vertical)
 
+(defun creature/adjust-show-candidate ()
+  (when rime-active-mode
+    (unless (display-graphic-p)
+      (setq rime-show-candidate 'sidewindow))))
+(add-hook 'rime-active-mode-hook #'creature/adjust-show-candidate)
+
 (lazy-load-set-keys
  '(("M-i" . rime-select-schema)
    ("C-`" . rime-send-keybinding)
