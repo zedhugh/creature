@@ -211,3 +211,6 @@
 [submodule "site-lisp/cond-let"]
 	path = site-lisp/cond-let
 	url = https://github.com/tarsius/cond-let.git
+[submodule "site-lisp/crontab-mode"]
+	path = site-lisp/crontab-mode
+	url = https://github.com/emacs-pe/crontab-mode.git

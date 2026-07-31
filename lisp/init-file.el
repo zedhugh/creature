@@ -10,6 +10,7 @@
 (add-pkg-in-pkg-dir "saveplace-pdf-view")
 (add-pkg-in-pkg-dir "graphviz-dot-mode")
 (add-pkg-in-pkg-dir "meson-mode")
+(add-pkg-in-pkg-dir "crontab-mode")
 
 
 (autoload 'vimrc-mode "vimrc-mode" "" t)
@@ -86,6 +87,12 @@
 (add-to-list
  'auto-mode-alist
  '("/meson\\(\\.build\\|_options\\.txt\\|\\.options\\)\\'" . meson-mode))
+
+
+(autoload 'crontab-mode "crontab-mode" "" t)
+(add-to-list
+ 'auto-mode-alist
+ '("/crontab\\(\\.X*[[:alnum:]]+\\)?\\'" . crontab-mode))
 
 
 ;; optimize performance of long-line files
