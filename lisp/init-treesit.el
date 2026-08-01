@@ -9,6 +9,9 @@
 
 (when creature/treesit-available
   (unless (featurep 'treesit) (require 'treesit))
+  (when (treesit-ready-p 'json)
+    (add-to-list 'auto-mode-alist '("\\.jsonc\\'" . json-ts-mode)))
+
   (when (treesit-ready-p 'javascript)
     (add-to-list 'major-mode-remap-alist '(js-mode . js-ts-mode))
     (add-to-list 'major-mode-remap-alist '(javascript-mode . js-ts-mode)))
