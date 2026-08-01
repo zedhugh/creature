@@ -47,8 +47,7 @@
         (pinentry-start))
     (error nil))
 
-  (setq magit-revision-show-gravatars
-        '("^Author:     " . "^Commit:     ")))
+  (setq magit-revision-show-gravatars t))
 
 ;;; ediff
 (setq ediff-split-window-function 'split-window-horizontally)

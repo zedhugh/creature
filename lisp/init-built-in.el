@@ -141,4 +141,9 @@ function `goto-line'."
 (advice-add 'goto-line-relative :override #'fix/goto-line-relative)
 
 
+;; gravatar show avatar in magit
+(with-eval-after-load 'gravatar
+  (setq gravatar-service 'libravatar))
+
+
 (provide 'init-built-in)
