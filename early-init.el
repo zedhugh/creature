@@ -1,5 +1,13 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(defconst creature/native-comp-enable t
+  "Enable `native-comp' feature when supported.")
+
+(let ((enable-native-comp creature/native-comp-enable))
+  (setq native-comp-jit-compilation enable-native-comp
+        native-comp-deferred-compilation enable-native-comp))
+
+
 (setq package-enable-at-startup nil)
 
 (setq frame-inhibit-implied-resize t)
@@ -40,3 +48,6 @@
 
 (setq warning-minimum-level :error)
 (setq warning-minimum-log-level :error)
+
+(load-theme 'modus-vivendi t)
+;; (load-theme 'wheatgrass t)

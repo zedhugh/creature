@@ -260,4 +260,29 @@ Directory entries are excluded from the returned list."
   (kill-buffer (current-buffer)))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                native-comp                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun creature/native-compile-packages-async (lisp-file-dir)
+  "Compile .el file which in LISP-FILE-DIR to .eln recursively"
+  (interactive "D")
+  (if (bound-and-true-p creature/native-comp-enable)
+      (if (and (fboundp 'native-comp-available-p) (native-comp-available-p))
+          (native-compile-async
+           lisp-file-dir t nil
+           (lambda (file)
+             (let ((filename (file-name-nondirectory file))
+                   (dir (file-name-directory file)))
+               (not (or (string= filename "wgrep-subtest.el")
+                        (string= filename ".dir-locals.el")
+                        (string= filename "test.el")
+                        (string-suffix-p "-test.el" filename)
+                        (string-suffix-p "-tests.el" filename)
+                        (string-match-p "/test/" dir)
+                        (string-match-p "/tests/" dir)))))
+           )
+        (error "native-comp unavailable"))
+    (error "native-comp disabled by `creature/native-comp-enable'")))
+
+
 (provide 'init-func)
