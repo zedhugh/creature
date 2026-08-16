@@ -7,6 +7,7 @@
 (add-pkg-in-pkg-dir "with-editor")
 (add-pkg-in-pkg-dir "llama")
 (add-pkg-in-pkg-dir "cond-let")
+(add-pkg-in-pkg-dir "pinentry")
 
 (require 'lazy-load)
 
