@@ -3,6 +3,7 @@
 (require 'init-package)
 (add-pkg-in-pkg-dir "plantuml-mode")
 (add-pkg-in-pkg-dir "dash")
+(add-pkg-in-pkg-dir "deflate")
 
 (autoload 'plantuml-mode "plantuml-mode" "" t)
 (add-to-list 'auto-mode-alist '("\\.\\(plantuml\\|pum\\|plu\\)\\'" . plantuml-mode))
