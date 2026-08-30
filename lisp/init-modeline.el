@@ -30,19 +30,6 @@
   "Length of marked string.")
 (put 'creature/mode-line-region-info 'risky-local-variable t)
 
-(defvar creature/mode-line-region-info
-  '(:eval
-    (when (and (region-active-p) (eq creature/focus-window (selected-window)))
-      (let ((length (- (region-end) (region-beginning)))
-            (line (- (line-number-at-pos (region-end))
-                     (line-number-at-pos (region-beginning))
-                     -1)))
-        (propertize
-         (format " [%d|%d]" length line)
-         ))))
-  "Length of marked string.")
-(put 'creature/mode-line-region-info 'risky-local-variable t)
-
 (defvar creature/mode-line-line-and-column
   `(line-number-mode
     (column-number-mode
