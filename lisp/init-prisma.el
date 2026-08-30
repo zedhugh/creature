@@ -13,7 +13,7 @@
    (file-name-concat
     (file-name-directory (or load-file-name buffer-file-name))
     "../tree-sitter-langs/tree-sitter-prisma"))))
-(add-to-list 'auto-mode-alist '("\\.prisma$" . prisma-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.prisma\\'" . prisma-ts-mode))
 
 ;; language server is `@prisma/language-server', install it by npm/pnpm/yarn.
 (with-eval-after-load 'eglot
