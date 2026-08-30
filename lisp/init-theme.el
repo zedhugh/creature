@@ -67,7 +67,7 @@ Each font conf looks like (FAMILY . SIZE).")
 if FRAME is nil, setup for current frame."
   ;; single-byte code
   (setq inhibit-compacting-font-caches
-        (if (eq system-type 'window-nt) t nil))
+        (if (eq system-type 'windows-nt) t nil))
 
   (let ((single (car creature/font-config))
         (multi  (cdr creature/font-config)))

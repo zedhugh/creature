@@ -19,7 +19,7 @@ Copy from https://github.com/skuro/plantuml-mode/issues/98."
             (cdr bounds)
             keywords
             :exclusive 'no
-            :company-docsig #'indentity))))
+            :company-docsig #'identity))))
 
 (with-eval-after-load 'plantuml-mode
   (setq plantuml-exec-mode 'executable

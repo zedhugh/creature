@@ -35,7 +35,7 @@
 
     (setq gptel-default-mode #'org-mode
           gptel-backend bigmodel-code
-          gptel-model 'gml-5.1
+          gptel-model 'glm-5.1
           )))
 
 (provide 'init-gptel)

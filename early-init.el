@@ -26,7 +26,7 @@
   (scroll-bar-mode -1))
 
 
-(defun creature/welcom-message ()
+(defun creature/welcome-message ()
   (let (init-time startup-time)
     (setq startup-time (time-since before-init-time))
     (setq init-time
@@ -43,7 +43,7 @@
     (insert initial-scratch-message)
     (set-buffer-modified-p nil)))
 
-(add-hook 'emacs-startup-hook #'creature/welcom-message 1999)
+(add-hook 'emacs-startup-hook #'creature/welcome-message 1999)
 
 
 (setq warning-minimum-level :error)

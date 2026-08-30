@@ -17,7 +17,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (put 'erase-buffer 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
-(put 'narrow-to-defun 'disable nil)
+(put 'narrow-to-defun 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
 ;; Always use space for indentation
