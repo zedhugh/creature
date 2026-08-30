@@ -13,8 +13,9 @@
 (set-selection-coding-system 'utf-8)
 (modify-coding-system-alist 'process "*" 'utf-8)
 
+(setq use-short-answers t)
+
 ;; Don't show prompt when call function
-(fset 'yes-or-no-p 'y-or-n-p)
 (put 'erase-buffer 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-defun 'disabled nil)
