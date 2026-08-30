@@ -9,12 +9,16 @@
 (require 'cl-lib)
 (require 'subr-x)
 
-(defun add-dir-and-subdirs-to-load-path (dir)
-  "Add directory and its subdirectoris to `load-path'.
+(cl-defun add-dir-and-subdirs-to-load-path (dir)
+  "Add directory and its subdirectoris to `load-path' when no `.nosearch' file exists in DIR.
 Detect whether there are any loadable module in DIR, if so, add DIR to `load-path'.
 Do this recursively for subdirectories of DIR."
   (unless (file-directory-p dir)
     (error "%s is not a directory" dir))
+
+  ;; if a `.nosearch' file exists in dir, skip it directly
+  (when (file-exists-p (expand-file-name ".nosearch" dir))
+    (cl-return-from add-dir-and-subdirs-to-load-path))
 
   (let ((subdirs nil)
         (files nil)
