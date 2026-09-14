@@ -1,8 +1,8 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'init-package)
-(add-pkg-in-pkg-dir "markdown-mode")
-(add-pkg-in-pkg-dir "edit-indirect")
+
+(creature/pkg-active 'markdown-mode)
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)

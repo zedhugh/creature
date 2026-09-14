@@ -1,12 +1,9 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'init-package)
-(add-pkg-in-pkg-dir "prettier")
-(add-pkg-in-pkg-dir "iter2")
-(add-pkg-in-pkg-dir "nvm")
-(add-pkg-in-pkg-dir "s")
-(add-pkg-in-pkg-dir "dash")
-(add-pkg-in-pkg-dir "f")
+
+(creature/pkg-active 'prettier)
+
 (require 'init-editorconfig)
 
 (autoload 'prettier-mode "prettier" "" t)

@@ -1,10 +1,8 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'init-package)
-(add-pkg-in-pkg-dir "emms")
 
-(autoload 'emms-all "emms-setup" "" t)
-(autoload 'emms-default-players "" t)
+(creature/pkg-active 'emms)
 
 (with-eval-after-load 'emms-lyrics
   (setq emms-lyrics-dir "/home/zedhugh/.lyrics"))

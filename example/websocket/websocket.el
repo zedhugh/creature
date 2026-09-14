@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'init-package)
-(add-pkg-in-pkg-dir "emacs-websocket")
+(add-to-list 'load-path (file-name-concat creature/pkg-dir "emacs-websocket"))
 
 (require 'websocket)
 

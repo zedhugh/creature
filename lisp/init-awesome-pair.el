@@ -1,9 +1,8 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'init-package)
-(add-pkg-in-pkg-dir "awesome-pair")
 
-(require 'lazy-load)
+(creature/pkg-active 'awesome-pair)
 
 
 (with-eval-after-load 'awesome-pair

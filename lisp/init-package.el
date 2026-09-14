@@ -1,67 +1,123 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'cl-lib)
+(require 'subr-x)
+(require 'info)
+
 (defconst creature/pkg-dir
   (expand-file-name
    "../site-lisp"
    (file-name-directory(or load-file-name buffer-file-name)))
   "Package directory.")
 
-(require 'cl-lib)
-(require 'subr-x)
+(defconst creature/pkgs
+  '((magit . ( :load "magit/lisp" :autoload "magit-autoloads" :info "magit/docs"
+               :deps (compat cond-let llama transient with-editor)))
+    (compat . (:load "compat" :info "compat"))
+    (cond-let . (:load "cond-let" :autoload "cond-let-autoloads"))
+    (llama . ( :load "llama" :autoload "llama-autoloads"
+               :deps (compat)))
+    (transient . ( :load "transient/lisp" :autoload "transient-autoloads"
+                   :info "transient/docs" :deps (compat cond-let)))
+    (with-editor . ( :load "with-editor/lisp" :autoload "with-editor-autoloads"
+                     :info "with-editor/docs" :deps (compat cond-let)))
+    (git-modes . ( :load "git-modes" :autoload "git-modes-autoloads"
+                   :deps (compat)))
+    (pinentry . (:load "pinentry" :autoload "pinentry"))
+    (lazy-load . (:load "lazy-load" :autoload "lazy-load"))
+    (awesome-pair . (:load "awesome-pair"))
+    (editorconfig . (:load "editorconfig-emacs"))
+    (emmet-mode . (:load "emmet-mode"))
+    (eslint-disable-rule . (:load "eslint-disable-rule"))
+    (eslint . (:load "eslint/lisp"))
+    (gptel . (:load "gptel" :deps (compat transient)))
+    (expand-region . (:load "expand-region"))
+    (rg . (:load "rg" :info "rg" :deps (transient wgrep)))
+    (wgrep . (:load "Emacs-wgrep"))
+    (avy . (:load "avy"))
+    (mwim . (:load "mwim"))
+    (symbol-overlay . (:load "symbol-overlay"))
+    (markdown-mode . (:load "markdown-mode" :deps (edit-indirect)))
+    (edit-indirect . (:load "edit-indirect"))
+    (emms . (:load "emms" :autoload "emms-auto" :info "emms/doc"))
+    (nov . (:load "nov" :deps (esxml)))
+    (esxml . (:load "esxml"))
+    (org-pomodoro . (:load "org-pomodoro" :deps (alert)))
+    (alert . (:load "alert" :deps (gntp)))
+    (gntp . (:load "gntp"))
+    (ox-hugo . (:load "ox-hugo" :autoload "ox-hugo-autoloads" :deps (tomelr)))
+    (tomelr . (:load "tomelr"))
+    (plantuml-mode . (:load "plantuml-mode" :deps (dash deflate)))
+    (dash . (:load "dash"))
+    (deflate . (:load "deflate" :deps (dash)))
+    (prettier . (:load "prettier" :info "prettier" :deps (iter2 nvm)))
+    (iter2 . (:load "iter2"))
+    (nvm . (:load "nvm" :deps (s dash f)))
+    (s . (:load "s"))
+    (f . (:load "f" :deps (s dash)))
+    (prisma-ts-mode . (:load "prisma-ts-mode"))
+    (rime . (:load "emacs-rime" :deps (dash posframe)))
+    (posframe . (:load "posframe"))
+    (sdcv . (:load "sdcv" :deps (posframe)))
+    (which-key . (:load "emacs-which-key"))
+    (yasnippet . (:load "yasnippet"))
+    (yasnippet-snippets . (:load "yasnippet-snippets" :deps (yasnippet)))
+    (auto-yasnippet . (:load "auto-yasnippet" :deps (yasnippet)))
+    (vimrc-mode . (:load "vimrc-mode"))
+    (yaml-mode . (:load "yaml-mode"))
+    (lua-mode . (:load "lua-mode"))
+    (nginx-mode . (:load "nginx-mode"))
+    (pdf-tools . ( :load "pdf-tools/lisp" :autoload "pdf-tools-autoloads"
+                   :deps (tablist)))
+    (tablist . (:load "tablist"))
+    (saveplace-pdf-view . (:load "saveplace-pdf-view"))
+    (graphviz-dot-mode . (:load "graphviz-dot-mode"))
+    (meson-mode . (:load "meson-mode"))
+    (crontab-mode . (:load "crontab-mode"))
+    (marginalia . (:load "marginalia" :deps (compat)))
+    (vertico . (:load ("vertico" "vertico/extensions") :deps (compat)))
+    (corfu . (:load ("corfu" "corfu/extensions") :deps (compat)))
+    (orderless . (:load "orderless" :deps (compat)))
+    (cape . (:load "cape" :deps (compat)))
+    (consult . (:load "consult" :deps (compat)))
+    (corfu-terminal . (:load "emacs-corfu-terminal" :deps (corfu popon)))
+    (popon . (:load "emacs-popon"))
+    (embark . (:load "embark"))
+    )
+  "Package name and config pair.")
 
-(cl-defun add-dir-and-subdirs-to-load-path (dir)
-  "Add directory and its subdirectoris to `load-path' when no `.nosearch' file exists in DIR.
-Detect whether there are any loadable module in DIR, if so, add DIR to `load-path'.
-Do this recursively for subdirectories of DIR."
-  (unless (file-directory-p dir)
-    (error "%s is not a directory" dir))
+(defvar creature/pkgs-actived nil
+  "Actived packages.
+This is temporary variable for function `creature/pkg-active'.")
 
-  ;; if a `.nosearch' file exists in dir, skip it directly
-  (when (file-exists-p (expand-file-name ".nosearch" dir))
-    (cl-return-from add-dir-and-subdirs-to-load-path))
+(cl-defun creature/pkg-active (pkg)
+  "Setup package."
+  (when (member pkg creature/pkgs-actived)
+    (cl-return-from creature/pkg-active creature/pkgs-actived))
 
-  (let ((subdirs nil)
-        (files nil)
-        (temp-filepath nil)
-        ;; (loadable-suffixes (get-load-suffixes))
-        (load-extension (mapcar (lambda (str) (string-remove-prefix "." str)) load-suffixes))
-        (exclude-dirs '("." ".."
-                        "dist" "node_modules" "__pycache__" "test"
-                        "RCS" "CVS" "rcs" "cvs" ".git" ".github")))
+  (let* ((pkg-config (alist-get pkg creature/pkgs))
+         (pkg-load-path (plist-get pkg-config :load))
+         (pkg-autoload (plist-get pkg-config :autoload))
+         (pkg-info-dir (plist-get pkg-config :info))
+         (pkg-deps (plist-get pkg-config :deps)))
+    (unless pkg-config (error "package(%s) not in `creature/pkgs'." pkg))
 
-    (dolist (filename (directory-files dir))
-      (setq temp-filepath (file-name-concat dir filename))
-      (if (file-directory-p temp-filepath)
-          (unless (member filename exclude-dirs)
-            (add-to-list 'subdirs temp-filepath t))
-        (when (file-regular-p temp-filepath)
-          (add-to-list 'files temp-filepath t))))
+    (dolist (dep pkg-deps) (creature/pkg-active dep))
+    (if (stringp pkg-load-path)
+        (add-to-list 'load-path (file-name-concat creature/pkg-dir pkg-load-path))
+      (dolist (path pkg-load-path)
+        (add-to-list 'load-path (file-name-concat creature/pkg-dir path))))
+    (when pkg-autoload (load pkg-autoload t t))
+    (when pkg-info-dir
+      (add-to-list 'Info-additional-directory-list
+                   (file-name-concat creature/pkg-dir pkg-info-dir))))
 
-    (when (cl-some (lambda (file)
-                     (member (file-name-extension file) load-extension))
-                   files)
-      (add-to-list 'load-path dir))
-    (mapc #'add-dir-and-subdirs-to-load-path subdirs)))
+  (add-to-list 'creature/pkgs-actived pkg))
 
-(defun add-pkg-in-pkg-dir (pkg)
-  "Add PKG located in `creature/pkg-dir' to `load-path'."
-  (add-dir-and-subdirs-to-load-path (expand-file-name pkg creature/pkg-dir)))
+(add-to-list 'Info-additional-directory-list
+             (file-truename (file-name-concat creature/pkg-dir "../.cache")))
 
 (add-to-list 'load-path creature/pkg-dir)
 
-;; add basic packages
-(add-pkg-in-pkg-dir "lazy-load")
-
-;; "transient" and "compat" always use submodule package
-;; and "cond-let" is dependency of "transient"
-(dolist (pkg '("transient" "cond-let" "compat"))
-  (add-pkg-in-pkg-dir pkg))
-
-(dolist (pkg '("transient" "compat"))
-  (let ((file (locate-library pkg))
-        (feature (intern-soft pkg)))
-    (when (and (featurep feature) (string-prefix-p "/usr/share/emacs" file))
-      (unload-feature feature t)
-      (require feature))))
 
 (provide 'init-package)

@@ -1,10 +1,14 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(require 'init-package)
 (unless (locate-library "editorconfig")
-  (add-pkg-in-pkg-dir "editorconfig-emacs"))
+  (require 'init-package)
 
-(autoload 'editorconfig-mode "editorconfig" "" t)
+  (creature/pkg-active 'editorconfig)
+
+  (autoload 'editorconfig-mode "editorconfig" "" t)
+  (autoload 'editorconfig-conf-mode "editorconfig-conf-mode" "" t)
+  (add-to-list 'auto-mode-alist
+               '("\\.editorconfig\\'" . editorconfig-conf-mode)))
 
 (defun creature/editorconfig-setup ()
   (editorconfig-mode 1)
@@ -25,10 +29,6 @@
 
 (add-hook 'find-file-hook #'creature/editorconfig-setup)
 
-
-(autoload 'editorconfig-conf-mode "editorconfig-conf-mode" "" t)
-(add-to-list 'auto-mode-alist
-             '("\\.editorconfig\\'" . editorconfig-conf-mode))
 
 (with-eval-after-load 'editorconfig
   (add-to-list 'editorconfig-indentation-alist '(js-ts-mode js-indent-level))

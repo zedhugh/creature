@@ -1,11 +1,10 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'init-package)
-(add-pkg-in-pkg-dir "emacs-rime")
-(add-pkg-in-pkg-dir "dash")
-(add-pkg-in-pkg-dir "posframe")
 
-(require 'lazy-load)
+(creature/pkg-active 'rime)
+(creature/pkg-active 'lazy-load)
+
 (require 'rime)
 
 

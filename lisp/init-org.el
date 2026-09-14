@@ -1,12 +1,9 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'init-package)
-(add-pkg-in-pkg-dir "org-pomodoro")
-(add-pkg-in-pkg-dir "alert")
-(add-pkg-in-pkg-dir "gntp")
-(add-pkg-in-pkg-dir "ox-hugo")
-(add-pkg-in-pkg-dir "tomelr")
 
+(creature/pkg-active 'org-pomodoro)
+(creature/pkg-active 'ox-hugo)
 
 ;; customize mode for src lang
 (defconst creature/org-src-lang-modes

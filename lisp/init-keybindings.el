@@ -1,12 +1,13 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'init-package)
-(add-pkg-in-pkg-dir "expand-region")
-(add-pkg-in-pkg-dir "rg")
-(add-pkg-in-pkg-dir "Emacs-wgrep")
-(add-pkg-in-pkg-dir "avy")
-(add-pkg-in-pkg-dir "mwim")
-(add-pkg-in-pkg-dir "symbol-overlay")
+
+(creature/pkg-active 'expand-region)
+(creature/pkg-active 'rg)
+(creature/pkg-active 'avy)
+(creature/pkg-active 'mwim)
+(creature/pkg-active 'symbol-overlay)
+(creature/pkg-active 'lazy-load)
 
 
 (defconst creature/prefix-key "M-m"
@@ -18,8 +19,6 @@
 
 (global-set-key (kbd "C-c '") (kbd "`"))
 
-
-(require 'lazy-load)
 
 ;;; expand-region
 (lazy-load-local-keys

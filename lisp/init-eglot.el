@@ -1,6 +1,8 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(require 'lazy-load)
+(require 'init-package)
+
+(creature/pkg-active 'lazy-load)
 
 (defun creature/eglot-load-markdown-for-doc ()
   (when (and (fboundp 'eglot-managed-p)

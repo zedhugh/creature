@@ -1,6 +1,8 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(add-pkg-in-pkg-dir "gptel")
+(require 'init-package)
+
+(creature/pkg-active 'gptel)
 
 (let ((gptel-autoload-file
        (file-name-concat creature/cache-dir "gptel-autoloads.el")))

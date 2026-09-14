@@ -1,11 +1,12 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'init-package)
-(add-pkg-in-pkg-dir "yasnippet")
-(add-pkg-in-pkg-dir "yasnippet-snippets")
-(add-pkg-in-pkg-dir "auto-yasnippet")
 
-(require 'lazy-load)
+(creature/pkg-active 'yasnippet)
+(creature/pkg-active 'yasnippet-snippets)
+(creature/pkg-active 'auto-yasnippet)
+(creature/pkg-active 'lazy-load)
+
 (require 'yasnippet)
 (require 'yasnippet-snippets)
 

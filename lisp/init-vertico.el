@@ -1,15 +1,15 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'init-package)
-(add-pkg-in-pkg-dir "marginalia")
-(add-pkg-in-pkg-dir "vertico")
-(add-pkg-in-pkg-dir "corfu")
-(add-pkg-in-pkg-dir "orderless")
-(add-pkg-in-pkg-dir "cape")
-(add-pkg-in-pkg-dir "consult")
-(add-pkg-in-pkg-dir "emacs-corfu-terminal")
-(add-pkg-in-pkg-dir "emacs-popon")
-(add-pkg-in-pkg-dir "embark")
+
+(creature/pkg-active 'marginalia)
+(creature/pkg-active 'vertico)
+(creature/pkg-active 'corfu)
+(creature/pkg-active 'orderless)
+(creature/pkg-active 'cape)
+(creature/pkg-active 'consult)
+(creature/pkg-active 'corfu-terminal)
+(creature/pkg-active 'embark)
 
 
 (require 'marginalia)

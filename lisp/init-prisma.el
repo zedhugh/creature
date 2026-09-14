@@ -2,7 +2,8 @@
 
 (require 'init-package)
 
-(add-pkg-in-pkg-dir "prisma-ts-mode")
+(creature/pkg-active 'prisma-ts-mode)
+
 (autoload 'prisma-ts-mode "prisma-ts-mode" "" t)
 ;; remember run `treesit-install-language-grammar' command to install `prisma'
 (add-to-list

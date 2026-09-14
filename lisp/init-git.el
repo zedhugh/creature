@@ -1,15 +1,11 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'init-package)
-(add-pkg-in-pkg-dir "magit")
-(add-pkg-in-pkg-dir "dash")
-(add-pkg-in-pkg-dir "git-modes")
-(add-pkg-in-pkg-dir "with-editor")
-(add-pkg-in-pkg-dir "llama")
-(add-pkg-in-pkg-dir "cond-let")
-(add-pkg-in-pkg-dir "pinentry")
 
-(require 'lazy-load)
+(creature/pkg-active 'magit)
+(creature/pkg-active 'git-modes)
+(creature/pkg-active 'pinentry)
+(creature/pkg-active 'lazy-load)
 
 (lazy-load-global-keys
  '(("C-x g" . magit-status))
@@ -42,11 +38,7 @@
   ;; (require 'forge)
 
   ;; pinentry for prompting password of gpg when sign git commit
-  (condition-case nil
-      (progn
-        (require 'pinentry)
-        (pinentry-start))
-    (error nil))
+  (condition-case nil (pinentry-start) (error nil))
 
   (setq magit-revision-show-gravatars t))
 
@@ -55,7 +47,7 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 (with-eval-after-load 'project
-  (require 'magit))
+  (require 'magit-extras))
 
 
 (provide 'init-git)

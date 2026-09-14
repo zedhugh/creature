@@ -1,16 +1,16 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (require 'init-package)
-(add-pkg-in-pkg-dir "vimrc-mode")
-(add-pkg-in-pkg-dir "yaml-mode")
-(add-pkg-in-pkg-dir "lua-mode")
-(add-pkg-in-pkg-dir "nginx-mode")
-(add-pkg-in-pkg-dir "pdf-tools")
-(add-pkg-in-pkg-dir "tablist")
-(add-pkg-in-pkg-dir "saveplace-pdf-view")
-(add-pkg-in-pkg-dir "graphviz-dot-mode")
-(add-pkg-in-pkg-dir "meson-mode")
-(add-pkg-in-pkg-dir "crontab-mode")
+
+(creature/pkg-active 'vimrc-mode)
+(creature/pkg-active 'yaml-mode)
+(creature/pkg-active 'lua-mode)
+(creature/pkg-active 'nginx-mode)
+(creature/pkg-active 'pdf-tools)
+(creature/pkg-active 'saveplace-pdf-view)
+(creature/pkg-active 'graphviz-dot-mode)
+(creature/pkg-active 'meson-mode)
+(creature/pkg-active 'crontab-mode)
 
 
 (autoload 'vimrc-mode "vimrc-mode" "" t)
